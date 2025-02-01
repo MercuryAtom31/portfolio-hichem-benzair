@@ -134,3 +134,17 @@ nav {
 .link:hover .link-title2 {
   transform: rotate(0);
 }
+
+/* Resume PDF Download. */
+.download-btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.download-btn:hover {
+  background-color: #45a049;
+}

@@ -40,6 +40,39 @@ const Navbar = () => {
                 </div>
               </span>
             </a>
+            <a
+              href="https://github.com/MercuryAtom31"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="link"
+            >
+              <span className="mask">
+                <div className="link-container">
+                  <span className="link-title1 title">GitHub</span>
+                  <span className="link-title2 title">GitHub</span>
+                </div>
+              </span>
+            </a>
+            <a
+              href="https://www.youtube.com/@zinoenglish6019"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="link"
+            >
+              <span className="mask">
+                <div className="link-container">
+                  <span className="link-title1 title">Youtube</span>
+                  <span className="link-title2 title">Youtube</span>
+                </div>
+              </span>
+            </a>
+            <a 
+            href="/CVs_Eng_Fr_Hichem_Benzair.pdf" 
+            download="CVs_Eng_Fr_Hichem_Benzair.pdf" 
+            className="download-btn"
+            >
+            Download Resume
+          </a>
           </div>
         </div>
       </div>
