@@ -19,33 +19,34 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="max-w-sm mx-auto p-4 border rounded shadow mt-20">
-      <h2 className="text-2xl font-bold mb-4 text-center">Admin Login</h2>
-      <form onSubmit={handleLogin}>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Email"
-          className="w-full p-2 border mb-2"
-          required
-        />
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-          className="w-full p-2 border mb-4"
-          required
-        />
-        <button
-          type="submit"
-          className="w-full bg-blue-500 text-white p-2 rounded"
-        >
-          Login
-        </button>
-        {error && <p className="text-red-500 mt-2">{error}</p>}
-      </form>
+    <div className="login-page">
+      {/* Glitch Effect Name */}
+      <h1 className="glitch login-glitch" data-text="Hichem A. Benzaïr">
+        Hichem A. Benzaïr
+      </h1>
+
+      {/* Login Box */}
+      <div className="login-container">
+        <h2>Admin Login</h2>
+        <form onSubmit={handleLogin}>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email"
+            required
+          />
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
+            required
+          />
+          <button type="submit">Login</button>
+          {error && <p className="error-message">{error}</p>}
+        </form>
+      </div>
     </div>
   );
 };

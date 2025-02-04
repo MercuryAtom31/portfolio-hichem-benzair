@@ -1,12 +1,137 @@
-input[type="email"],
-input[type="password"] {
-  color: black; 
-  background-color: white; 
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+/* General Login Page Background */
+.login-page {
+  background: linear-gradient(135deg, #000000, #222222);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column; /* Stack glitch name and login box */
+  justify-content: center;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  gap: 20px; /* Space between glitch text and login box */
 }
 
-::placeholder {
-  color: gray; 
+/* Glitch Effect */
+.login-glitch {
+  position: relative;
+  color: white;
+  font-size: 3.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  animation: glitch-cycle 7.2s infinite;
 }
+
+.login-glitch::before,
+.login-glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  clip-path: inset(0 0 50% 0);
+  text-shadow: -2px 0 rgba(0, 212, 255, 0.8);
+  animation: glitch-effect 5.2s infinite;
+  opacity: 0;
+}
+
+.login-glitch::after {
+  clip-path: inset(50% 0 0 0);
+  text-shadow: 2px 0 rgba(246, 114, 202, 0.8);
+}
+
+/* Glitch Animations */
+@keyframes glitch-cycle {
+  0%, 83% {
+    color: white;
+    text-shadow: none;
+    transform: none;
+  }
+  94%, 100% {
+    color: #00d4ff;
+    text-shadow: 0 0 15px #f672ca, -2px 2px rgba(0, 212, 255, 0.8);
+    transform: skewX(5deg);
+  }
+}
+
+@keyframes glitch-effect {
+  0%, 83% {
+    opacity: 0;
+    transform: translate(0);
+  }
+  94%, 96% {
+    opacity: 1;
+    transform: translate(1px, -1px);
+  }
+  97%, 100% {
+    transform: translate(-1px, 1px) skewX(10deg);
+  }
+}
+
+/* Login Container */
+.login-container {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 0, 0, 0.5);
+  box-shadow: 0 8px 32px 0 rgba(0, 255, 255, 0.5);
+  border-radius: 15px;
+  padding: 2rem;
+  max-width: 350px;
+  width: 100%;
+  text-align: center;
+  color: white;
+}
+
+/* Input Fields */
+.login-container input[type="email"],
+.login-container input[type="password"] {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  background: rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(0, 255, 255, 0.5);
+  border-radius: 8px;
+  color: white;
+  outline: none;
+  backdrop-filter: blur(5px);
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Placeholder */
+.login-container input[type="email"]::placeholder,
+.login-container input[type="password"]::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Input Focus */
+.login-container input:focus {
+  border: 1px solid #ff4d4d;
+  box-shadow: 0 0 8px rgba(255, 0, 0, 0.7);
+}
+
+/* Submit Button */
+.login-container button {
+  width: 100%;
+  padding: 12px;
+  background: #00cccc;
+  color: black;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  font-weight: bold;
+}
+
+.login-container button:hover {
+  background: #00e6e6;
+  transform: scale(1.05);
+}
+
+/* Error Message */
+.login-container .error-message {
+  color: #ff4d4f;
+  margin-top: 10px;
+}
+
