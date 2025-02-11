@@ -13,6 +13,7 @@ import { onAuthStateChanged, signOut, User } from "firebase/auth";
 
 function App() {
   const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true); // 🔹 Added loading state
   const { t } = useTranslation() || {
     t: (key) => key,
     i18n: { changeLanguage: () => {} },
@@ -21,6 +22,7 @@ function App() {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      setLoading(false); // 🔹 Set loading to false once user state is updated
     });
     return () => unsubscribe();
   }, []);
@@ -36,11 +38,14 @@ function App() {
   return (
     <Router>
       <div className="flex flex-col min-h-screen">
-        {user && <Navbar />}
-        {!user ? (
-          <Login />
-        ) : (
+        {loading ? ( // 🔹 Show loading state instead of Login flashing
+          <div className="flex justify-center items-center h-screen">
+            <p className="text-white text-2xl">Loading...</p>
+          </div>
+        ) : user ? ( // 🔹 If user is authenticated, show the main layout
           <div className="flex flex-col flex-grow">
+            <Navbar />
+            
             {/* Language Switcher */}
             <div className="absolute top-4 right-4">
               <button onClick={() => changeLanguage("en")} className="mr-2">
@@ -74,8 +79,11 @@ function App() {
                 {t("logout")}
               </button>
             </div>
+
             {/* <Footer /> */}
           </div>
+        ) : (
+          <Login />
         )}
       </div>
     </Router>
