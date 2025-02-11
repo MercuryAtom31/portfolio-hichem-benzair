@@ -10,6 +10,7 @@ import Login from "./components/Login";
 import Projects from "./pages/Projects";
 import { auth } from "./firebaseConfig";
 import { onAuthStateChanged, signOut, User } from "firebase/auth";
+import Videos from "./pages/Videos";
 
 function App() {
   const [user, setUser] = useState<User | null>(null);
@@ -67,6 +68,7 @@ function App() {
                   }
                 />
                 <Route path="/projects" element={<Projects />} />
+                <Route path="/videos" element={<Videos />} />
               </Routes>
             </main>
 

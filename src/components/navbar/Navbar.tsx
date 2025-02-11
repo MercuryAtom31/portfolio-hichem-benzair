@@ -34,7 +34,8 @@ const Navbar: React.FC = () => {
               { label: t("Contact"), link: "mailto:hichembenzair@gmail.com" },
               { label: t("LinkedIn"), link: "https://www.linkedin.com/in/hichem-a-benzair" },
               { label: t("GitHub"), link: "https://github.com/MercuryAtom31" },
-              { label: t("YouTube"), link: "https://www.youtube.com/@zinoenglish6019" }
+              // { label: t("YouTube"), link: "https://www.youtube.com/@zinoenglish6019" }
+              { label: t("YouTube"), link: "/videos" }
             ].map((item, index) => (
               <a href={item.link} key={index} className="link">
                 <span className="mask">
