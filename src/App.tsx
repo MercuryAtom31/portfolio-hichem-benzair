@@ -13,7 +13,10 @@ import { onAuthStateChanged, signOut, User } from "firebase/auth";
 
 function App() {
   const [user, setUser] = useState<User | null>(null);
-  const { t } = useTranslation() || { t: (key) => key, i18n: { changeLanguage: () => {} } };
+  const { t } = useTranslation() || {
+    t: (key) => key,
+    i18n: { changeLanguage: () => {} },
+  };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -49,20 +52,29 @@ function App() {
             {/* Main Content */}
             <main className="pt-16 flex-grow">
               <Routes>
-                <Route path="/" element={<HeroSection />} />
+                <Route
+                  path="/"
+                  element={
+                    <>
+                      <HeroSection />
+                      <LanguagesSection />
+                    </>
+                  }
+                />
                 <Route path="/projects" element={<Projects />} />
               </Routes>
-              <LanguagesSection />
             </main>
 
             {/* Logout Button */}
             <div className="fixed bottom-4 right-4">
-              <button onClick={handleLogout} className="bg-red-500 text-white px-4 py-2 rounded">
+              <button
+                onClick={handleLogout}
+                className="bg-red-500 text-white px-4 py-2 rounded"
+              >
                 {t("logout")}
               </button>
             </div>
-
-            <Footer />
+            {/* <Footer /> */}
           </div>
         )}
       </div>
