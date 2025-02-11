@@ -1,171 +1,31 @@
-// import React from "react";
-// import "./Navbar.css";
-
-// const Navbar = () => {
-//   return (
-//     <nav className="bg-gray-900 text-white fixed w-full z-50 shadow-md">
-//       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-//         <div className="flex justify-between items-center h-16">
-//           {/* Glitch Logo */}
-//           <div className="text-2xl font-bold glitch">Hichem A. Benzaïr</div>
-
-//           {/* Links with wave effect */}
-//           <div className="flex space-x-6">
-//             <a href="#" className="link">
-//               <span className="mask">
-//                 <div className="link-container">
-//                   <span className="link-title1 title">Blog</span>
-//                   <span className="link-title2 title">Blog</span>
-//                 </div>
-//               </span>
-//             </a>
-//             <a href="mailto:hichembenzair@gmail.com" className="link">
-//               <span className="mask">
-//                 <div className="link-container">
-//                   <span className="link-title1 title">Contact</span>
-//                   <span className="link-title2 title">Contact</span>
-//                 </div>
-//               </span>
-//             </a>
-//             <a
-//               href="https://www.linkedin.com/in/hichem-a-benzair"
-//               target="_blank"
-//               rel="noopener noreferrer"
-//               className="link"
-//             >
-//               <span className="mask">
-//                 <div className="link-container">
-//                   <span className="link-title1 title">LinkedIn</span>
-//                   <span className="link-title2 title">LinkedIn</span>
-//                 </div>
-//               </span>
-//             </a>
-//             <a
-//               href="https://github.com/MercuryAtom31"
-//               target="_blank"
-//               rel="noopener noreferrer"
-//               className="link"
-//             >
-//               <span className="mask">
-//                 <div className="link-container">
-//                   <span className="link-title1 title">GitHub</span>
-//                   <span className="link-title2 title">GitHub</span>
-//                 </div>
-//               </span>
-//             </a>
-//             <a
-//               href="https://www.youtube.com/@zinoenglish6019"
-//               target="_blank"
-//               rel="noopener noreferrer"
-//               className="link"
-//             >
-//               <span className="mask">
-//                 <div className="link-container">
-//                   <span className="link-title1 title">Youtube</span>
-//                   <span className="link-title2 title">Youtube</span>
-//                 </div>
-//               </span>
-//             </a>
-//             {/* <a 
-//             href="/CVs_Eng_Fr_Hichem_Benzair.pdf" 
-//             download="CVs_Eng_Fr_Hichem_Benzair.pdf" 
-//             className="download-btn"
-//             >
-//             Download Resume
-//           </a> */}
-//           </div>
-//         </div>
-//       </div>
-//     </nav>
-//   );
-// };
-
-// export default Navbar;
-
 import React from "react";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 import "./Navbar.css";
 
-// Since there are no props, we define a simple functional component
 const Navbar: React.FC = () => {
+  const { t, i18n } = useTranslation() || { t: (key) => key, i18n: { changeLanguage: () => {} } };
+
+  const changeLanguage = (lang: string) => {
+    i18n.changeLanguage(lang);
+  };
+
   return (
     <nav className="bg-gray-900 text-white fixed w-full z-50 shadow-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Glitch Logo */}
           <div className="text-2xl font-bold glitch">Hichem A. Benzaïr</div>
 
-          {/* Links with wave effect */}
           <div className="flex space-x-6">
-            <a href="#" className="link">
-              <span className="mask">
-                <div className="link-container">
-                  <span className="link-title1 title">Blog</span>
-                  <span className="link-title2 title">Blog</span>
-                </div>
-              </span>
-            </a>
-
-            <a href="mailto:hichembenzair@gmail.com" className="link">
-              <span className="mask">
-                <div className="link-container">
-                  <span className="link-title1 title">Contact</span>
-                  <span className="link-title2 title">Contact</span>
-                </div>
-              </span>
-            </a>
-
-            <a
-              href="https://www.linkedin.com/in/hichem-a-benzair"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="link"
-            >
-              <span className="mask">
-                <div className="link-container">
-                  <span className="link-title1 title">LinkedIn</span>
-                  <span className="link-title2 title">LinkedIn</span>
-                </div>
-              </span>
-            </a>
-
-            <a
-              href="https://github.com/MercuryAtom31"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="link"
-            >
-              <span className="mask">
-                <div className="link-container">
-                  <span className="link-title1 title">GitHub</span>
-                  <span className="link-title2 title">GitHub</span>
-                </div>
-              </span>
-            </a>
-
-            <a
-              href="https://www.youtube.com/@zinoenglish6019"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="link"
-            >
-              <span className="mask">
-                <div className="link-container">
-                  <span className="link-title1 title">YouTube</span>
-                  <span className="link-title2 title">YouTube</span>
-                </div>
-              </span>
-            </a>
-
-            {/* Uncomment if needed */}
-            {/* 
-            <a 
-              href="/CVs_Eng_Fr_Hichem_Benzair.pdf" 
-              download="CVs_Eng_Fr_Hichem_Benzair.pdf" 
-              className="download-btn"
-            >
-              Download Resume
-            </a> 
-            */}
+            <Link to="/" className="link">{t("home")}</Link>
+            <Link to="/projects" className="link">{t("projects")}</Link>
+            <a href="mailto:hichembenzair@gmail.com" className="link">{t("contact")}</a>
+            <a href="https://www.linkedin.com/in/hichem-a-benzair" target="_blank" rel="noopener noreferrer" className="link">{t("linkedin")}</a>
+            <a href="https://github.com/MercuryAtom31" target="_blank" rel="noopener noreferrer" className="link">{t("github")}</a>
+            <div className="language-switcher ml-4">
+              <button onClick={() => changeLanguage("en")} className="mr-2">🇬🇧 English</button>
+              <button onClick={() => changeLanguage("fr")}>🇫🇷 Français</button>
+            </div>
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Carter+One&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Carter+One&display=swap");
 
 .languages-section {
   background-color: white;
@@ -45,7 +45,7 @@
 }
 
 .icon-label {
-  font-family: 'Carter One', cursive;
+  font-family: "Carter One", cursive;
   font-size: 14px;
   color: #333;
   transition: color 0.3s ease;
