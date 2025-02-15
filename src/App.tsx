@@ -11,6 +11,7 @@ import Projects from "./pages/Projects";
 import { auth } from "./firebaseConfig";
 import { onAuthStateChanged, signOut, User } from "firebase/auth";
 import Videos from "./pages/Videos";
+import TestimonialSection from "./components/testimonials/Testimonial";
 
 function App() {
   const [user, setUser] = useState<User | null>(null);
@@ -64,6 +65,7 @@ function App() {
                     <>
                       <HeroSection />
                       <LanguagesSection />
+                      <TestimonialSection />
                     </>
                   }
                 />
