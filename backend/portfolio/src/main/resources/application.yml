@@ -1,0 +1,36 @@
+server:
+  port: 8080
+  error:
+    include-message: always
+
+logging:
+  level:
+    root: INFO
+    com.benzair: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+spring:
+  application:
+    name: portfolio
+
+  datasource:
+    url: jdbc:mysql://database:3306/portfoliodb  # Explicit port
+    username: user
+    password: pwd
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update  # ✅ Keep update to avoid table recreation
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+
+  config:
+    activate:
+      on-profile: docker
+
+  sql:
+    init:
+      platform: mysql
+      mode: always  # ✅ Prevent Spring Boot from running schema.sql

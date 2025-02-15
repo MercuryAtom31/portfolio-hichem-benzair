@@ -1,0 +1,136 @@
+// plugins {
+//     id 'java'
+//     id 'org.springframework.boot' version '3.4.1'
+//     id 'io.spring.dependency-management' version '1.1.7'
+// 	id 'jacoco'
+// }
+
+
+// group = 'com.benzair'
+// version = '0.0.1-SNAPSHOT'
+
+// java {
+//     toolchain {
+//         languageVersion = JavaLanguageVersion.of(17)
+//     }
+// }
+
+// configurations {
+//     compileOnly {
+//         extendsFrom annotationProcessor
+//     }
+// }
+
+// repositories {
+//     mavenCentral()
+// }
+
+// ext {
+//     mapstructVersion = "1.5.3.Final"
+//     lombokVersion = "1.18.26"
+//     lombokMapstructBindingVersion = "0.2.0"
+// }
+
+// dependencies {
+//     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+//     implementation 'org.springframework.boot:spring-boot-starter-web'
+//     implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+//     implementation 'com.itextpdf:itextpdf:5.5.13.2' 
+//     compileOnly "org.projectlombok:lombok:${lombokVersion}"
+//     annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+//     annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+//     annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
+//     developmentOnly 'org.springframework.boot:spring-boot-devtools'
+//     runtimeOnly 'com.mysql:mysql-connector-j'
+//     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+//     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+// }
+
+// jacoco {
+//     toolVersion = "0.8.10" // Latest JaCoCo version
+// }
+
+// jacocoTestReport {
+//     dependsOn test
+
+//     afterEvaluate {
+//         classDirectories.setFrom(files(classDirectories.files.collect {
+//             fileTree(dir: it, exclude: [
+//                 // You can exclude specific classes from coverage if needed
+//             ])
+//         }))
+//     }
+// }
+
+// jacocoTestCoverageVerification {
+//     violationRules {
+//         rule {
+//             limit {
+//                 minimum = 0.80 // Set minimum test coverage percentage
+//             }
+//         }
+//     }
+// }
+
+// test.finalizedBy jacocoTestReport
+// check.dependsOn jacocoTestCoverageVerification
+
+// test {
+//     useJUnitPlatform()
+//     testLogging {
+//         events "passed", "skipped", "failed"
+//     }
+// }
+
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.4.1'
+    id 'io.spring.dependency-management' version '1.1.7'
+    id 'jacoco'
+}
+
+group = 'com.benzair'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    mapstructVersion = "1.5.3.Final"
+    lombokVersion = "1.18.26"
+    lombokMapstructBindingVersion = "0.2.0"
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+    annotationProcessor "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    runtimeOnly 'com.mysql:mysql-connector-j'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}

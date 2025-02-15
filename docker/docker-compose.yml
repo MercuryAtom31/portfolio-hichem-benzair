@@ -1,0 +1,65 @@
+services:
+  database:
+    image: mysql:8.0
+    platform: linux/amd64  # For M1/M2 Mac compatibility
+    container_name: portfolio_database
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: portfoliodb
+      MYSQL_USER: user
+      MYSQL_PASSWORD: pwd
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-uuser", "-ppwd", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build:
+      context: ../backend/portfolio  # Fix: Use correct relative path
+      dockerfile: Dockerfile
+    container_name: portfolio_backend
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      DB_HOST: database
+      DB_PORT: 3306
+      DB_NAME: portfoliodb
+      DB_USER: user
+      DB_PASSWORD: pwd
+    depends_on:
+      database:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ../frontend
+      dockerfile: Dockerfile
+    container_name: portfolio_frontend
+    ports:
+      - "80:80"
+    volumes:
+      - ../frontend/nginx.conf:/etc/nginx/conf.d/default.conf 
+    depends_on:
+      - backend
+
+  phpmyadmin:
+    image: phpmyadmin:5.2.0
+    container_name: phpmyadmin
+    restart: always
+    ports:
+      - "8081:80"
+    environment:
+      PMA_ARBITRARY: 1
+      PMA_HOST: database
+    depends_on:
+      database:
+        condition: service_healthy
+
+volumes:
+  mysql_data:

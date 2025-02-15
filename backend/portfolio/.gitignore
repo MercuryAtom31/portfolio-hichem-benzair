@@ -1,0 +1,74 @@
+### Node.js ###
+node_modules/
+frontend/node_modules/
+
+### Gradle ###
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+### IntelliJ IDEA ###
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### Visual Studio Code ###
+.vscode/
+
+### Other ###
+.DS_Store
+*.log
+*.tmp
+*.swp
+*.bak
+
+### Portfolio Specific ###
+public/
+dist/
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+*.log
+*.cache/
+*.next/
+.vite/
+.vite-cache/
+.eslintcache
+coverage/
+
+### Ignore temporary files ###
+*.tmp
+*.bak
+*.swp
+*.swo
+*.log
+
+# Ignore build outputs #
+/build/

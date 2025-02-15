@@ -1,0 +1,14 @@
+DROP TABLE IF EXISTS users;
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL
+);
+
+DROP TABLE IF EXISTS testimonials;
+CREATE TABLE testimonials (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_name VARCHAR(100) NOT NULL,
+    message TEXT NOT NULL,
+    approved BOOLEAN DEFAULT FALSE
+);
