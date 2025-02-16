@@ -1,24 +1,35 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
-import "./Navbar.css"; 
+import { Link, useNavigate } from "react-router-dom";
+import { auth } from "../../firebaseConfig";
+import { signOut, User } from "firebase/auth";
+import "./Navbar.css";
 
-const Navbar: React.FC = () => {
-  const { t, i18n } = useTranslation() || { t: (key) => key, i18n: { changeLanguage: () => {} } };
+interface NavbarProps {
+  user: User | null;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ user }) => {
+  const { t, i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await signOut(auth);
+    navigate("/");
+  };
 
   const changeLanguage = (lang: string) => {
     i18n.changeLanguage(lang);
+    localStorage.setItem("language", lang); // Save language preference
   };
 
   return (
     <nav className="bg-gray-900 text-white fixed w-full z-50 shadow-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo with Glitch Effect */}
           <div className="text-2xl font-bold glitch">Hichem A. Benzaïr</div>
 
-          {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="lg:hidden text-white focus:outline-none"
@@ -26,15 +37,14 @@ const Navbar: React.FC = () => {
             {isOpen ? "✖" : "☰"}
           </button>
 
-          {/* Navigation Links with Wave Effect */}
           <div className={`lg:flex space-x-6 ${isOpen ? "block" : "hidden"} lg:block absolute lg:static top-16 left-0 w-full bg-gray-900 lg:w-auto lg:bg-transparent text-center lg:text-left`}>
             {[
               { label: t("Home"), link: "/", internal: true },
               { label: t("Projects"), link: "/projects", internal: true },
-              { label: t("Contact"), link: "/contact", internal: true }, // Updated to route to Contact Page
+              { label: t("Contact Me"), link: "/contact", internal: true },
               { label: t("LinkedIn"), link: "https://www.linkedin.com/in/hichem-a-benzair", internal: false },
-              { label: t("GitHub"), link: "https://github.com/MercuryAtom31", internal: false },
-              { label: t("YouTube"), link: "/videos", internal: true }
+              { label: t("Github"), link: "https://github.com/MercuryAtom31", internal: false },
+              { label: t("Youtube"), link: "/videos", internal: true }
             ].map((item, index) =>
               item.internal ? (
                 <Link to={item.link} key={index} className="link">
@@ -57,10 +67,23 @@ const Navbar: React.FC = () => {
               )
             )}
 
-            {/* Language Switcher */}
+            {/* 🔹 Restored Language Switcher */}
             <div className="mt-2 lg:mt-0 text-center lg:text-left">
               <button onClick={() => changeLanguage("en")} className="mr-2">🇬🇧 English</button>
               <button onClick={() => changeLanguage("fr")}>🇫🇷 Français</button>
+            </div>
+
+            {/* Authentication Buttons */}
+            <div className="mt-2 lg:mt-0 text-center lg:text-left">
+              {user ? (
+                <button onClick={handleLogout} className="bg-red-500 px-4 py-2 rounded">
+                  {t("logout")}
+                </button>
+              ) : (
+                <Link to="/login" className="bg-green-500 px-4 py-2 rounded">
+                  {t("login")}
+                </Link>
+              )}
             </div>
           </div>
         </div>
