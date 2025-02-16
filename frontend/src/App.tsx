@@ -12,6 +12,7 @@ import { auth } from "./firebaseConfig";
 import { onAuthStateChanged, signOut, User } from "firebase/auth";
 import Videos from "./pages/Videos";
 import TestimonialSection from "./components/testimonials/Testimonial";
+import Contact from "./pages/Contact";
 
 function App() {
   const [user, setUser] = useState<User | null>(null);
@@ -71,6 +72,7 @@ function App() {
                 />
                 <Route path="/projects" element={<Projects />} />
                 <Route path="/videos" element={<Videos />} />
+                <Route path="/contact" element={<Contact/>} />
               </Routes>
             </main>
 

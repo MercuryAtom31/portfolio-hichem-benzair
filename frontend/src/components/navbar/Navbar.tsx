@@ -29,22 +29,33 @@ const Navbar: React.FC = () => {
           {/* Navigation Links with Wave Effect */}
           <div className={`lg:flex space-x-6 ${isOpen ? "block" : "hidden"} lg:block absolute lg:static top-16 left-0 w-full bg-gray-900 lg:w-auto lg:bg-transparent text-center lg:text-left`}>
             {[
-              { label: t("Home"), link: "/" },
-              { label: t("Projects"), link: "/projects" },
-              { label: t("Contact"), link: "mailto:hichembenzair@gmail.com" },
-              { label: t("LinkedIn"), link: "https://www.linkedin.com/in/hichem-a-benzair" },
-              { label: t("GitHub"), link: "https://github.com/MercuryAtom31" },
-              { label: t("YouTube"), link: "/videos" }
-            ].map((item, index) => (
-              <a href={item.link} key={index} className="link">
-                <span className="mask">
-                  <div className="link-container">
-                    <span className="link-title1 title">{item.label}</span>
-                    <span className="link-title2 title">{item.label}</span>
-                  </div>
-                </span>
-              </a>
-            ))}
+              { label: t("Home"), link: "/", internal: true },
+              { label: t("Projects"), link: "/projects", internal: true },
+              { label: t("Contact"), link: "/contact", internal: true }, // Updated to route to Contact Page
+              { label: t("LinkedIn"), link: "https://www.linkedin.com/in/hichem-a-benzair", internal: false },
+              { label: t("GitHub"), link: "https://github.com/MercuryAtom31", internal: false },
+              { label: t("YouTube"), link: "/videos", internal: true }
+            ].map((item, index) =>
+              item.internal ? (
+                <Link to={item.link} key={index} className="link">
+                  <span className="mask">
+                    <div className="link-container">
+                      <span className="link-title1 title">{item.label}</span>
+                      <span className="link-title2 title">{item.label}</span>
+                    </div>
+                  </span>
+                </Link>
+              ) : (
+                <a href={item.link} key={index} className="link" target="_blank" rel="noopener noreferrer">
+                  <span className="mask">
+                    <div className="link-container">
+                      <span className="link-title1 title">{item.label}</span>
+                      <span className="link-title2 title">{item.label}</span>
+                    </div>
+                  </span>
+                </a>
+              )
+            )}
 
             {/* Language Switcher */}
             <div className="mt-2 lg:mt-0 text-center lg:text-left">
