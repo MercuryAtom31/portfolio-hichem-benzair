@@ -15,10 +15,15 @@ spring:
   application:
     name: portfolio
 
+  # datasource:
+  #   url: jdbc:mysql://database:3306/portfoliodb  # Explicit port
+  #   username: user
+  #   password: pwd
+  #   driver-class-name: com.mysql.cj.jdbc.Driver
   datasource:
-    url: jdbc:mysql://database:3306/portfoliodb  # Explicit port
-    username: user
-    password: pwd
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:portfoliodb}
+    username: ${DB_USER:user}
+    password: ${DB_PASSWORD:pwd}
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
