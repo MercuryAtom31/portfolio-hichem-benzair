@@ -76,8 +76,8 @@ const Navbar: React.FC<NavbarProps> = ({ user }) => {
               <Link to="/admin/testimonials" className="link">
                 <span className="mask">
                   <div className="link-container">
-                    <span className="link-title1 title">Admin Dashboard</span>
-                    <span className="link-title2 title">Admin Dashboard</span>
+                    <span className="link-title1 title">Admin</span>
+                    <span className="link-title2 title">Admin</span>
                   </div>
                 </span>
               </Link>
@@ -85,8 +85,8 @@ const Navbar: React.FC<NavbarProps> = ({ user }) => {
 
             {/* Language Switcher */}
             <div className="mt-2 lg:mt-0 text-center lg:text-left">
-              <button onClick={() => changeLanguage("en")} className="mr-2">🇬🇧 English</button>
-              <button onClick={() => changeLanguage("fr")}>🇫🇷 Français</button>
+              <button onClick={() => changeLanguage("en")} className="mr-2">🇬🇧</button>
+              <button onClick={() => changeLanguage("fr")}>🇫🇷</button>
             </div>
 
             {/* Authentication Buttons */}
