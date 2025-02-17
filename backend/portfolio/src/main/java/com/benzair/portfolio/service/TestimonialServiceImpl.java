@@ -18,9 +18,9 @@ public class TestimonialServiceImpl implements TestimonialService {
     private final TestimonialRequestMapper requestMapper;
     private final TestimonialResponseMapper responseMapper;
 
-    public TestimonialServiceImpl(TestimonialRepository repository, 
-                                  TestimonialRequestMapper requestMapper, 
-                                  TestimonialResponseMapper responseMapper) {
+    public TestimonialServiceImpl(TestimonialRepository repository,
+            TestimonialRequestMapper requestMapper,
+            TestimonialResponseMapper responseMapper) {
         this.repository = repository;
         this.requestMapper = requestMapper;
         this.responseMapper = responseMapper;
@@ -45,6 +45,21 @@ public class TestimonialServiceImpl implements TestimonialService {
         Testimonial testimonial = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Testimonial not found"));
         testimonial.setApproved(true);
+        repository.save(testimonial);
+    }
+
+    @Override
+    public List<TestimonialResponseModel> getAllTestimonials() {
+        return repository.findAll().stream()
+                .map(responseMapper::toResponse)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public void disapproveTestimonial(Long id) {
+        Testimonial testimonial = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Testimonial not found"));
+        testimonial.setApproved(false);
         repository.save(testimonial);
     }
 }

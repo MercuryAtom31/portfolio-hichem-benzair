@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/testimonials") // Changed from singular to match frontend
+@RequestMapping("/testimonials") 
 public class TestimonialController {
 
     private final TestimonialService service;
@@ -30,5 +30,17 @@ public class TestimonialController {
     @PutMapping("/{id}/approve")
     public void approveTestimonial(@PathVariable Long id) {
         service.approveTestimonial(id);
+    }
+
+    // (Hide) a testimonial
+    @PutMapping("/{id}/disapprove")
+    public void disapproveTestimonial(@PathVariable Long id) {
+        service.disapproveTestimonial(id);
+    }
+
+    // Returns all testimonials (approved and unapproved)
+    @GetMapping("/all")
+    public List<TestimonialResponseModel> getAllTestimonials() {
+        return service.getAllTestimonials();
     }
 }
