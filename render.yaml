@@ -1,0 +1,47 @@
+services:
+  - type: web
+    name: portfolio-backend
+    env: docker
+    dockerfilePath: ./backend/portfolio/Dockerfile
+    envVars:
+      - key: DB_HOST
+        fromDatabase:
+          name: portfolio-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: portfolio-db
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: portfolio-db
+          property: database
+      - key: DB_USER
+        fromDatabase:
+          name: portfolio-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: portfolio-db
+          property: password
+      - key: PORT
+        value: 10000
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: ALLOWED_ORIGINS
+        value: https://portfolio-frontend.onrender.com,http://localhost:5173,http://localhost
+  
+  - type: web
+    name: portfolio-frontend
+    env: static
+    buildCommand: cd frontend && npm install && npm run build
+    staticPublishPath: ./frontend/dist
+    envVars:
+      - key: NODE_ENV
+        value: production
+
+databases:
+  - name: portfolio-db
+    databaseName: portfoliodb
+    user: portfolio_user
+    plan: free
