@@ -13,7 +13,7 @@ const TestimonialSection = () => {
   const [message, setMessage] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:8080/testimonials")
+    fetch("https://portfolio-hichem-benzair-backend.onrender.com/testimonials")
       .then((res) => res.json())
       .then((data) => setTestimonials(data))
       .catch((error) => console.error("Error fetching testimonials:", error));
@@ -29,7 +29,7 @@ const TestimonialSection = () => {
     const newTestimonial = { userName, message };
   
     try {
-      const res = await fetch("http://localhost:8080/testimonials", {
+      const res = await fetch("https://portfolio-hichem-benzair-backend.onrender.com/testimonials", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newTestimonial),
@@ -52,7 +52,7 @@ const TestimonialSection = () => {
   };
   
   const fetchApprovedTestimonials = () => {
-    fetch("http://localhost:8080/testimonials")
+    fetch("https://portfolio-hichem-benzair-backend.onrender.com/testimonials")
       .then((res) => res.json())
       .then((data) => setTestimonials(data))
       .catch((error) => console.error("Error fetching testimonials:", error));

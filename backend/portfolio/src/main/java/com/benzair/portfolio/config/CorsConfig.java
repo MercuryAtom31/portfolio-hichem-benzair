@@ -30,8 +30,9 @@ public class CorsConfig {
             public void addCorsMappings(CorsRegistry registry) {
                 String allowedOrigins = System.getenv("ALLOWED_ORIGINS");
                 if (allowedOrigins == null || allowedOrigins.trim().isEmpty()) {
-                    allowedOrigins = "http://localhost:5173,http://localhost";
-                }
+                    // Combine all allowed domains into one string, separated by commas
+                    allowedOrigins = "http://localhost:5173,http://localhost,https://portfolio-hichem-benzair-frontend.onrender.com";
+                }                
                 registry.addMapping("/**")
                         .allowedOrigins(allowedOrigins.split(","))
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
