@@ -46,9 +46,17 @@ const Navbar: React.FC<NavbarProps> = ({ user }) => {
               { label: t("Home"), link: "/", internal: true },
               { label: t("Projects"), link: "/projects", internal: true },
               { label: t("Contact Me"), link: "/contact", internal: true },
-              { label: t("LinkedIn"), link: "https://www.linkedin.com/in/hichem-a-benzair", internal: false },
-              { label: t("Github"), link: "https://github.com/MercuryAtom31", internal: false },
-              { label: t("Youtube"), link: "/videos", internal: true }
+              {
+                label: t("LinkedIn"),
+                link: "https://www.linkedin.com/in/hichem-a-benzair",
+                internal: false,
+              },
+              {
+                label: t("Github"),
+                link: "https://github.com/MercuryAtom31",
+                internal: false,
+              },
+              { label: t("Youtube"), link: "/videos", internal: true },
             ].map((item, index) =>
               item.internal ? (
                 <Link to={item.link} key={index} className="link">
@@ -60,7 +68,13 @@ const Navbar: React.FC<NavbarProps> = ({ user }) => {
                   </span>
                 </Link>
               ) : (
-                <a href={item.link} key={index} className="link" target="_blank" rel="noopener noreferrer">
+                <a
+                  href={item.link}
+                  key={index}
+                  className="link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <span className="mask">
                     <div className="link-container">
                       <span className="link-title1 title">{item.label}</span>
@@ -85,14 +99,19 @@ const Navbar: React.FC<NavbarProps> = ({ user }) => {
 
             {/* Language Switcher */}
             <div className="mt-2 lg:mt-0 text-center lg:text-left">
-              <button onClick={() => changeLanguage("en")} className="mr-2">🇬🇧</button>
+              <button onClick={() => changeLanguage("en")} className="mr-2">
+                🇬🇧
+              </button>
               <button onClick={() => changeLanguage("fr")}>🇫🇷</button>
             </div>
 
             {/* Authentication Buttons */}
             <div className="mt-2 lg:mt-0 text-center lg:text-left">
               {user ? (
-                <button onClick={handleLogout} className="bg-red-500 px-4 py-2 rounded">
+                <button
+                  onClick={handleLogout}
+                  className="bg-red-500 px-4 py-2 rounded"
+                >
                   {t("logout")}
                 </button>
               ) : (

@@ -5,32 +5,22 @@ services:
     dockerfilePath: ./backend/portfolio/Dockerfile
     envVars:
       - key: DB_HOST
-        fromDatabase:
-          name: portfolio-db
-          property: host
+        value: mysql-cpvm.railway.internal
       - key: DB_PORT
-        fromDatabase:
-          name: portfolio-db
-          property: port
+        value: "3306"
       - key: DB_NAME
-        fromDatabase:
-          name: portfolio-db
-          property: database
+        value: railway
       - key: DB_USER
-        fromDatabase:
-          name: portfolio-db
-          property: user
+        value: root
       - key: DB_PASSWORD
-        fromDatabase:
-          name: portfolio-db
-          property: password
-      - key: PORT
-        value: 10000
+        value: wlmrUzZDHzaDpKozcjsLgMmwXDbVrYDJ
       - key: SPRING_PROFILES_ACTIVE
         value: prod
       - key: ALLOWED_ORIGINS
         value: https://portfolio-frontend.onrender.com,http://localhost:5173,http://localhost
-  
+      - key: PORT
+        value: "8080"
+
   - type: web
     name: portfolio-frontend
     env: static
@@ -39,9 +29,3 @@ services:
     envVars:
       - key: NODE_ENV
         value: production
-
-databases:
-  - name: portfolio-db
-    databaseName: portfoliodb
-    user: portfolio_user
-    plan: free

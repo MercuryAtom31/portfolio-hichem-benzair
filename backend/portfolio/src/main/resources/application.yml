@@ -1,42 +1,132 @@
-server:
-  # port: 8080
-  port: ${PORT:8080}
-  error:
-    include-message: always
-
-logging:
-  level:
-    root: INFO
-    com.benzair: DEBUG
-    org.hibernate.SQL: DEBUG
-    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
-
 spring:
-  application:
-    name: portfolio
-
-  # datasource:
-  #   url: jdbc:mysql://database:3306/portfoliodb  # Explicit port
-  #   username: user
-  #   password: pwd
-  #   driver-class-name: com.mysql.cj.jdbc.Driver
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:dev}
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
   datasource:
-    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:portfoliodb}
-    username: ${DB_USER:user}
-    password: ${DB_PASSWORD:pwd}
+    url: jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_NAME}?useSSL=true&serverTimezone=UTC
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
-
   jpa:
     hibernate:
-      ddl-auto: update  # ✅ Keep update to avoid table recreation
+      ddl-auto: update
     show-sql: true
     database-platform: org.hibernate.dialect.MySQL8Dialect
 
-  config:
-    activate:
-      on-profile: docker
 
-  sql:
-    init:
-      platform: mysql
-      mode: always  # ✅ Prevent Spring Boot from running schema.sql
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# server:
+#   # port: 8080
+#   port: ${PORT:8080}
+#   error:
+#     include-message: always
+
+# logging:
+#   level:
+#     root: INFO
+#     com.benzair: DEBUG
+#     org.hibernate.SQL: DEBUG
+#     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+# spring:
+#   application:
+#     name: portfolio
+
+#   # datasource:
+#   #   url: jdbc:mysql://database:3306/portfoliodb  # Explicit port
+#   #   username: user
+#   #   password: pwd
+#   #   driver-class-name: com.mysql.cj.jdbc.Driver
+#   datasource:
+#     url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:portfoliodb}
+#     username: ${DB_USER:user}
+#     password: ${DB_PASSWORD:pwd}
+#     driver-class-name: com.mysql.cj.jdbc.Driver
+
+#   jpa:
+#     hibernate:
+#       ddl-auto: update  # ✅ Keep update to avoid table recreation
+#     show-sql: true
+#     database-platform: org.hibernate.dialect.MySQL8Dialect
+
+#   config:
+#     activate:
+#       on-profile: docker
+
+#   sql:
+#     init:
+#       platform: mysql
+#       mode: always  # ✅ Prevent Spring Boot from running schema.sql
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# # server:
+# #   port: ${PORT:8080}
+# #   error:
+# #     include-message: always
+
+# # logging:
+# #   level:
+# #     root: INFO
+# #     com.benzair: DEBUG
+# #     org.hibernate.SQL: DEBUG
+# #     org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+# # spring:
+# #   application:
+# #     name: portfolio
+
+# #   datasource:
+# #     url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:mydatabase}
+# #     username: ${DB_USER:user}
+# #     password: ${DB_PASSWORD:pwd}
+# #     driver-class-name: org.postgresql.Driver
+
+# #   jpa:
+# #     hibernate:
+# #       ddl-auto: update  # Keeps your schema updated without recreating tables
+# #     show-sql: true
+# #     database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+# #   config:
+# #     activate:
+# #       on-profile: docker
+
+# #   sql:
+# #     init:
+# #       platform: postgres
+# #       mode: always  # Run schema.sql and data.sql at startup

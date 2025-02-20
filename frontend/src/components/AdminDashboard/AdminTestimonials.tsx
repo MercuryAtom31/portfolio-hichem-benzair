@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import './AdminTestimonials.css';
 
 interface Testimonial {
   id: number;

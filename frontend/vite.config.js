@@ -22,6 +22,7 @@ export default defineConfig(({ mode }) => ({
         target:
           mode === 'production'
             ? 'https://your-backend-service.onrender.com'
+            // ? 'https://portfolio-hichem-benzair.onrender.com'
             : 'http://localhost:8080',
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
