@@ -88,7 +88,7 @@ const AdminTestimonials: React.FC = () => {
 
   // 1) Replace http://localhost:8080/testimonials/all with your production backend URL
   useEffect(() => {
-    fetch("https://portfolio-hichem-benzair-backend.onrender.com/testimonials/all")
+    fetch("https://portfolio-hichem-benzair.onrender.com/testimonials/all")
       .then((res) => res.json())
       .then((data) => setTestimonials(data))
       .catch((error) => console.error("Error fetching all testimonials:", error));
@@ -97,8 +97,8 @@ const AdminTestimonials: React.FC = () => {
   const toggleApproval = async (testimonial: Testimonial) => {
     // 2) Replace localhost references here with your production backend URL
     const endpoint = testimonial.approved
-      ? `https://portfolio-hichem-benzair-backend.onrender.com/testimonials/${testimonial.id}/disapprove`
-      : `https://portfolio-hichem-benzair-backend.onrender.com/testimonials/${testimonial.id}/approve`;
+      ? `https://portfolio-hichem-benzair.onrender.com/testimonials/${testimonial.id}/disapprove`
+      : `https://portfolio-hichem-benzair.onrender.com/testimonials/${testimonial.id}/approve`;
 
     try {
       await fetch(endpoint, { method: "PUT" });
