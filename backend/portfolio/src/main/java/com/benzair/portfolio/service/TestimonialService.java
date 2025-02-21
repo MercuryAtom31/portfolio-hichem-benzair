@@ -14,4 +14,7 @@ public interface TestimonialService {
     List<TestimonialResponseModel> getAllTestimonials();
 
     void disapproveTestimonial(Long id);
+
+    void deleteTestimonial(Long id);
+
 }

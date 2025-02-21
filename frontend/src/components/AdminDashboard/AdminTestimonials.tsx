@@ -11,18 +11,19 @@
 // const AdminTestimonials: React.FC = () => {
 //   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
 
+//   // 1) Replace http://localhost:8080/testimonials/all with your production backend URL
 //   useEffect(() => {
-//     fetch("http://localhost:8080/testimonials/all")
+//     fetch("https://portfolio-hichem-benzair.onrender.com/testimonials/all")
 //       .then((res) => res.json())
 //       .then((data) => setTestimonials(data))
 //       .catch((error) => console.error("Error fetching all testimonials:", error));
 //   }, []);
 
 //   const toggleApproval = async (testimonial: Testimonial) => {
-//     // If currently approved, call /disapprove; otherwise call /approve
+//     // 2) Replace localhost references here with your production backend URL
 //     const endpoint = testimonial.approved
-//       ? `http://localhost:8080/testimonials/${testimonial.id}/disapprove`
-//       : `http://localhost:8080/testimonials/${testimonial.id}/approve`;
+//       ? `https://portfolio-hichem-benzair.onrender.com/testimonials/${testimonial.id}/disapprove`
+//       : `https://portfolio-hichem-benzair.onrender.com/testimonials/${testimonial.id}/approve`;
 
 //     try {
 //       await fetch(endpoint, { method: "PUT" });
@@ -73,6 +74,16 @@
 // export default AdminTestimonials;
 
 
+
+
+
+
+
+
+
+
+
+
 import React, { useEffect, useState } from "react";
 import './AdminTestimonials.css';
 
@@ -86,7 +97,6 @@ interface Testimonial {
 const AdminTestimonials: React.FC = () => {
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
 
-  // 1) Replace http://localhost:8080/testimonials/all with your production backend URL
   useEffect(() => {
     fetch("https://portfolio-hichem-benzair.onrender.com/testimonials/all")
       .then((res) => res.json())
@@ -94,15 +104,14 @@ const AdminTestimonials: React.FC = () => {
       .catch((error) => console.error("Error fetching all testimonials:", error));
   }, []);
 
+  // Approve or disapprove
   const toggleApproval = async (testimonial: Testimonial) => {
-    // 2) Replace localhost references here with your production backend URL
     const endpoint = testimonial.approved
       ? `https://portfolio-hichem-benzair.onrender.com/testimonials/${testimonial.id}/disapprove`
       : `https://portfolio-hichem-benzair.onrender.com/testimonials/${testimonial.id}/approve`;
 
     try {
       await fetch(endpoint, { method: "PUT" });
-      // Update state so the UI reflects the new approved status
       setTestimonials((prev) =>
         prev.map((t) =>
           t.id === testimonial.id ? { ...t, approved: !t.approved } : t
@@ -110,6 +119,23 @@ const AdminTestimonials: React.FC = () => {
       );
     } catch (error) {
       console.error("Error toggling testimonial approval:", error);
+    }
+  };
+
+  // **NEW**: Delete testimonial
+  const deleteTestimonial = async (id: number) => {
+    // Optional confirmation
+    if (!window.confirm("Are you sure you want to delete this testimonial?")) {
+      return;
+    }
+    try {
+      await fetch(`https://portfolio-hichem-benzair.onrender.com/testimonials/${id}`, {
+        method: "DELETE",
+      });
+      // Remove it from state
+      setTestimonials((prev) => prev.filter((t) => t.id !== id));
+    } catch (error) {
+      console.error("Error deleting testimonial:", error);
     }
   };
 
@@ -134,8 +160,13 @@ const AdminTestimonials: React.FC = () => {
               <td>{testimonial.message}</td>
               <td>{testimonial.approved ? "Yes" : "No"}</td>
               <td>
+                {/* Existing approve/hide button */}
                 <button onClick={() => toggleApproval(testimonial)}>
                   {testimonial.approved ? "Hide" : "Show"}
+                </button>
+                {/* New delete button */}
+                <button onClick={() => deleteTestimonial(testimonial.id)} style={{ marginLeft: "8px" }}>
+                  Delete
                 </button>
               </td>
             </tr>

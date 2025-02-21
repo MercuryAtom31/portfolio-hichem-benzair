@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/testimonials") 
+@RequestMapping("/testimonials")
 public class TestimonialController {
 
     private final TestimonialService service;
@@ -43,4 +43,10 @@ public class TestimonialController {
     public List<TestimonialResponseModel> getAllTestimonials() {
         return service.getAllTestimonials();
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteTestimonial(@PathVariable Long id) {
+        service.deleteTestimonial(id);
+    }
+
 }

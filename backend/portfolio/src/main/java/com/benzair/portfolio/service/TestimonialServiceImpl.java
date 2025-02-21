@@ -62,4 +62,10 @@ public class TestimonialServiceImpl implements TestimonialService {
         testimonial.setApproved(false);
         repository.save(testimonial);
     }
+
+    @Override
+    public void deleteTestimonial(Long id) {
+        repository.deleteById(id);
+    }
+
 }
