@@ -17,6 +17,9 @@ spring:
     show-sql: true
     database-platform: org.hibernate.dialect.MySQL8Dialect
 
+  sql:
+    init:
+      mode: always
 
 
 
