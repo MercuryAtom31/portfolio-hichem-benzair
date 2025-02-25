@@ -9,6 +9,7 @@ type Tab = {
   title: string;
   value: string;
   content?: string | React.ReactNode | any;
+  url?: string;
 };
 
 export const Tabs = ({
@@ -86,13 +87,51 @@ export const Tabs = ({
   );
 };
 
+// export const FadeInDiv = ({
+//   className,
+//   tabs,
+//   hovering,
+// }: {
+//   className?: string;
+//   key?: string;
+//   tabs: Tab[];
+//   active: Tab;
+//   hovering?: boolean;
+// }) => {
+//   const isActive = (tab: Tab) => {
+//     return tab.value === tabs[0].value;
+//   };
+//   return (
+//     <div className="relative w-full h-full">
+//       {tabs.map((tab, idx) => (
+//         <motion.div
+//           key={tab.value}
+//           layoutId={tab.value}
+//           style={{
+//             scale: 1 - idx * 0.1,
+//             top: hovering ? idx * -50 : 0,
+//             zIndex: -idx,
+//             opacity: idx < 3 ? 1 - idx * 0.1 : 0,
+//           }}
+//           animate={{
+//             y: isActive(tab) ? [0, 40, 0] : 0,
+//           }}
+//           className={cn("w-full h-full absolute top-0 left-0", className)}
+//         >
+//           {tab.content}
+//         </motion.div>
+//       ))}
+//     </div>
+//   );
+// };
+
 export const FadeInDiv = ({
   className,
   tabs,
+  active,
   hovering,
 }: {
   className?: string;
-  key?: string;
   tabs: Tab[];
   active: Tab;
   hovering?: boolean;
@@ -100,11 +139,16 @@ export const FadeInDiv = ({
   const isActive = (tab: Tab) => {
     return tab.value === tabs[0].value;
   };
+
   return (
     <div className="relative w-full h-full">
       {tabs.map((tab, idx) => (
-        <motion.div
+        // Make the whole motion element an anchor
+        <motion.a
           key={tab.value}
+          href={tab.url} // <-- Navigate to the GitHub URL
+          target="_blank"
+          rel="noopener noreferrer"
           layoutId={tab.value}
           style={{
             scale: 1 - idx * 0.1,
@@ -115,10 +159,13 @@ export const FadeInDiv = ({
           animate={{
             y: isActive(tab) ? [0, 40, 0] : 0,
           }}
-          className={cn("w-full h-full absolute top-0 left-0", className)}
+          className={cn(
+            "w-full h-full absolute top-0 left-0 cursor-pointer", 
+            className
+          )}
         >
           {tab.content}
-        </motion.div>
+        </motion.a>
       ))}
     </div>
   );

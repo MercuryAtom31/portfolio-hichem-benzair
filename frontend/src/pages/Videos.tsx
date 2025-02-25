@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const videos = [
   {
@@ -52,9 +53,11 @@ const videos = [
 ];
 
 const Videos = () => {
+  const { t } = useTranslation();
+  
   return (
     <div className="bg-gray-900 text-white min-h-screen p-6">
-      <h1 className="text-3xl font-bold mb-6">My YouTube Videos</h1>
+      <h1 className="text-3xl font-bold mb-6">{t("my_youtube_videos")}</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {videos.map((video, index) => (
           <div

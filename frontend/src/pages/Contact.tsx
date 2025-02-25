@@ -1,8 +1,11 @@
 import React, { FormEvent } from "react";
+import { useTranslation } from "react-i18next";
 import "./Contact.css";
 import Swal from "sweetalert2";
 
 const Contact: React.FC = () => {
+  const { t } = useTranslation();
+
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -26,15 +29,15 @@ const Contact: React.FC = () => {
 
       if (data.success) {
         Swal.fire({
-          title: "Thank you kindly!",
-          text: "Message sent successfully!",
+          title: t("thank_you_kindly"),
+          text: t("message_sent_successfully"),
           icon: "success",
         });
       }
     } catch (error) {
       Swal.fire({
-        title: "Oops!",
-        text: "Something went wrong, please try again later.",
+        title: t("oops"),
+        text: t("something_went_wrong_try_again_later"),
         icon: "error",
       });
     }
@@ -43,37 +46,37 @@ const Contact: React.FC = () => {
   return (
     <section className="contact">
       <form onSubmit={onSubmit}>
-        <h2>Contact Form</h2>
+        <h2>{t("contact_form")}</h2>
         <div className="input-box">
-          <label>Full Name</label>
+          <label>{t("full_name")}</label>
           <input
             type="text"
             className="field"
-            placeholder="Enter your name"
+            placeholder={t("enter_your_name")}
             name="name"
             required
           />
         </div>
         <div className="input-box">
-          <label>Email Address</label>
+          <label>{t("email_address")}</label>
           <input
             type="email"
             className="field"
-            placeholder="Enter your email"
+            placeholder={t("enter_your_email")}
             name="email"
             required
           />
         </div>
         <div className="input-box">
-          <label>Your Message</label>
+          <label>{t("your_message")}</label>
           <textarea
             name="message"
             className="field mess"
-            placeholder="Enter your message"
+            placeholder={t("enter_your_message")}
             required
           ></textarea>
         </div>
-        <button type="submit">Send Message</button>
+        <button type="submit">{t("send_message")}</button>
       </form>
     </section>
   );

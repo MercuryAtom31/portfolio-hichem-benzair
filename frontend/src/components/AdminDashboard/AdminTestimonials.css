@@ -1,142 +1,229 @@
 .admin-testimonials {
-    margin: 20px;
-    padding: 20px;
-    /* Match the login container's semi-transparent black background */
-    background: rgba(0, 0, 0, 0.85);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    /* Neon border and shadow */
-    border: 1px solid rgba(0, 255, 255, 0.7);
-    box-shadow: 0 0 20px rgba(0, 255, 255, 0.5), 0 0 40px rgba(255, 0, 255, 0.4);
-    border-radius: 15px;
-    color: #fff;
-    font-family: 'Poppins', sans-serif;
-    animation: fadeIn 1s ease-in-out;
+  margin: 20px;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 255, 255, 0.7);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.5), 0 0 40px rgba(255, 0, 255, 0.4);
+  border-radius: 15px;
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* Smooth fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
-  
-  /* Smooth fade-in animation */
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
+}
+
+.admin-testimonials h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Wrapper to allow horizontal scrolling on small screens */
+.table-responsive {
+  overflow-x: auto;
+}
+
+/* Table styling */
+.admin-testimonials-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  color: #fff;
+  font-size: 1rem;
+}
+
+/* Table header styling */
+.admin-testimonials-table thead th {
+  background-color: rgba(0, 0, 0, 0.7);
+  border-bottom: 1px solid rgba(0, 255, 255, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 12px 15px;
+  color: #00cccc;
+}
+
+/* Table cells */
+.admin-testimonials-table th,
+.admin-testimonials-table td {
+  padding: 12px 15px;
+  border: 1px solid rgba(0, 255, 255, 0.2);
+  text-align: left;
+}
+
+/* Slight row striping & hover effect for better readability */
+.admin-testimonials-table tbody tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.admin-testimonials-table tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+/* Neon button styling */
+.admin-testimonials-table button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  background: #00cccc;
+  color: black;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.admin-testimonials-table button:hover {
+  background: #00e6e6;
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+}
+
+/* Responsiveness for tablets */
+@media (max-width: 768px) {
+  .admin-testimonials {
+    margin: 15px;
+    padding: 15px;
+  }
+
   .admin-testimonials h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #fff;
-    font-family: 'Poppins', sans-serif;
+    font-size: 1.5em;
   }
-  
-  /* Table styling */
-  .admin-testimonials-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    color: #fff;
-    font-size: 1rem;
-    overflow-x: auto; /* Make table scrollable on smaller screens */
-  }
-  
-  /* Table header styling */
-  .admin-testimonials-table thead th {
-    background-color: rgba(0, 0, 0, 0.7);
-    border-bottom: 1px solid rgba(0, 255, 255, 0.7);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding: 12px 15px;
-    color: #00cccc; /* Neon-like header text color */
-  }
-  
-  /* Table cells */
+
   .admin-testimonials-table th,
   .admin-testimonials-table td {
-    padding: 12px 15px;
-    border: 1px solid rgba(0, 255, 255, 0.2);
-    text-align: left;
+    padding: 10px;
+    font-size: 0.95em;
   }
-  
-  /* Slight row striping & hover effect for better readability */
-  .admin-testimonials-table tbody tr:nth-child(even) {
-    background-color: rgba(255, 255, 255, 0.05);
-  }
-  
-  .admin-testimonials-table tbody tr:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    transition: background-color 0.3s ease;
-  }
-  
-  /* Neon button styling */
+
   .admin-testimonials-table button {
-    padding: 8px 16px;
-    border: none;
-    border-radius: 4px;
-    background: #00cccc;
-    color: black;
-    cursor: pointer;
-    font-weight: bold;
-    box-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
-    transition: background 0.3s ease, transform 0.2s ease;
+    padding: 6px 12px;
   }
-  
-  .admin-testimonials-table button:hover {
-    background: #00e6e6;
-    transform: scale(1.05);
-    box-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+}
+
+/* Responsiveness for mobile */
+@media (max-width: 480px) {
+  .admin-testimonials {
+    margin: 10px;
+    padding: 10px;
   }
-  
-  /* Responsiveness for tablets */
-  @media (max-width: 768px) {
-    .admin-testimonials {
-      margin: 15px;
-      padding: 15px;
-    }
-  
-    .admin-testimonials h2 {
-      font-size: 1.5em;
-    }
-  
-    .admin-testimonials-table th,
-    .admin-testimonials-table td {
-      padding: 10px;
-      font-size: 0.95em;
-    }
-  
-    .admin-testimonials-table button {
-      padding: 6px 12px;
-    }
-  
-    .admin-testimonials-table {
-      display: block;
-      white-space: nowrap;
-    }
+
+  .admin-testimonials h2 {
+    font-size: 1.2em;
   }
-  
-  /* Responsiveness for mobile */
-  @media (max-width: 480px) {
-    .admin-testimonials {
-      margin: 10px;
-      padding: 10px;
-    }
-  
-    .admin-testimonials h2 {
-      font-size: 1.2em;
-    }
-  
-    .admin-testimonials-table th,
-    .admin-testimonials-table td {
-      padding: 8px;
-      font-size: 0.85em;
-    }
-  
-    .admin-testimonials-table button {
-      padding: 4px 8px;
-      font-size: 0.85em;
-    }
+
+  .admin-testimonials-table th,
+  .admin-testimonials-table td {
+    padding: 8px;
+    font-size: 0.85em;
   }
-  
+
+  .admin-testimonials-table button {
+    padding: 4px 8px;
+    font-size: 0.85em;
+  }
+}
+
+
+
+
+
+
+
+/* New admin languages styling */
+.admin-languages {
+  margin-top: 40px;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 10px;
+}
+
+.languages-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.language-item {
+  background: #eaeaea;
+  padding: 10px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.remove-btn {
+  background: #ff4d4d;
+  border: none;
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.remove-btn:hover {
+  background: #e60000;
+}
+
+.add-language-form {
+  max-width: 400px;
+  margin: 0 auto;
+  background: #fff;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.add-language-form h3 {
+  text-align: center;
+  margin-bottom: 15px;
+  font-family: "Carter One", cursive;
+  color: #333;
+}
+
+.form-group {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 5px;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.form-group input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.add-btn {
+  width: 100%;
+  background: #00aaff;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.add-btn:hover {
+  background: #0077cc;
+}

@@ -1,6 +1,67 @@
+# spring:
+#   profiles:
+#     active: ${SPRING_PROFILES_ACTIVE:dev}
+# ---
+# spring:
+#   config:
+#     activate:
+#       on-profile: prod
+#   datasource:
+#     url: jdbc:mysql://${DB_HOST}:${DB_PORT}/${DB_NAME}?useSSL=true&serverTimezone=UTC
+#     username: ${DB_USER}
+#     password: ${DB_PASSWORD}
+#     driver-class-name: com.mysql.cj.jdbc.Driver
+#   jpa:
+#     hibernate:
+#       ddl-auto: update
+#     show-sql: true
+#     database-platform: org.hibernate.dialect.MySQL8Dialect
+
+#   sql:
+#     init:
+#       mode: always
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Common configuration
 spring:
   profiles:
     active: ${SPRING_PROFILES_ACTIVE:dev}
+
+# Development configuration (dev)
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:portfoliodb}
+    username: ${DB_USER:user}
+    password: ${DB_PASSWORD:pwd}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+  sql:
+    init:
+      mode: always
+
+# Production configuration (prod)
 ---
 spring:
   config:
@@ -16,10 +77,74 @@ spring:
       ddl-auto: update
     show-sql: true
     database-platform: org.hibernate.dialect.MySQL8Dialect
-
   sql:
     init:
       mode: always
+
+# Docker configuration (docker)
+---
+spring:
+  config:
+    activate:
+      on-profile: docker
+  datasource:
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:portfoliodb}
+    username: ${DB_USER:user}
+    password: ${DB_PASSWORD:pwd}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+  sql:
+    init:
+      mode: always
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

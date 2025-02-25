@@ -14,6 +14,26 @@ VALUES ('Demetrious Johnson', 'Hard worker!', true);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 -- -- Insert data into "users"
 -- INSERT INTO users (username, email) VALUES ('JohnDoe', 'john@example.com');
 
