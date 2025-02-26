@@ -5,6 +5,9 @@ import { auth } from "../../firebaseConfig";
 import { useTranslation } from "react-i18next";
 import "./Navbar.css";
 
+import FranceFlag from "../../assets/france-flag.svg";
+import UkFlag from "../../assets/united-states-of-america-flag.svg";
+
 interface NavbarProps {
   user: User | null;
 }
@@ -56,6 +59,11 @@ const Navbar: React.FC<NavbarProps> = ({ user }) => {
                 link: "https://github.com/MercuryAtom31",
                 internal: false,
               },
+              {
+                label: t("Udemy"),
+                link: "https://www.udemy.com/course/essential-tips-for-new-computer-science-students/?utm_source=adwords&utm_medium=udemyads&utm_campaign=Search_DSA_GammaCatchall_NonP_la.EN_cc.CA&campaigntype=Search&portfolio=Canada&language=EN&product=Course&test=&audience=DSA&topic=&priority=Gamma&utm_content=deal4584&utm_term=_._ag_160250050302_._ad_700948785488_._kw__._de_c_._dm__._pl__._ti_aud-2268488108639:dsa-1456167871416_._li_9000561_._pd__._&matchtype=&gad_source=1&gbraid=0AAAAADROdO3IShDCiEOlH_Ei7yBU2xnbe&gclid=CjwKCAiAlPu9BhAjEiwA5NDSA3Mr5iGP1VFZDpkPrxgfBJz21ZqKkwHhlrHQw9CufXtYa6dC6kRi7RoCQOEQAvD_BwE",
+                internal: false,
+              },
               { label: t("Youtube"), link: "/videos", internal: true },
             ].map((item, index) =>
               item.internal ? (
@@ -100,9 +108,20 @@ const Navbar: React.FC<NavbarProps> = ({ user }) => {
             {/* Language Switcher */}
             <div className="mt-2 lg:mt-0 text-center lg:text-left">
               <button onClick={() => changeLanguage("en")} className="mr-2">
-                🇬🇧
+                <img
+                  src={UkFlag}
+                  alt="English"
+                  className="inline-block h-6 w-6"
+                />
               </button>
-              <button onClick={() => changeLanguage("fr")}>🇫🇷</button>
+
+              <button onClick={() => changeLanguage("fr")}>
+                <img
+                  src={FranceFlag}
+                  alt="French"
+                  className="inline-block h-6 w-6"
+                />
+              </button>
             </div>
 
             {/* Authentication Buttons */}
