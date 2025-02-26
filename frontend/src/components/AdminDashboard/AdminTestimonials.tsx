@@ -284,7 +284,6 @@
 
 
 
-
 import React, { useEffect, useState, FormEvent } from "react";
 import { useTranslation } from "react-i18next";
 import "./AdminTestimonials.css";
@@ -385,7 +384,7 @@ const AdminTestimonials: React.FC = () => {
     setNewName(langItem.name);
   };
 
-  const handleAddLanguage = async (e: FormEvent) => {
+  const handleAddOrEditLanguage = async (e: FormEvent) => {
     e.preventDefault();
     if (!newIcon.trim() || !newName.trim()) {
       alert(t("please_fill_all_fields"));
@@ -393,27 +392,58 @@ const AdminTestimonials: React.FC = () => {
     }
 
     try {
-      const response = await fetch(
-        "https://portfolio-hichem-benzair.onrender.com/api/languages",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ icon: newIcon, name: newName }),
-        }
-      );
+      let response;
+      if (editMode && editingLanguageId !== null) {
+        // Edit existing language
+        response = await fetch(
+          `https://portfolio-hichem-benzair.onrender.com/api/languages/${editingLanguageId}`,
+          {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ icon: newIcon, name: newName }),
+          }
+        );
+      } else {
+        // Add new language
+        response = await fetch(
+          "https://portfolio-hichem-benzair.onrender.com/api/languages",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ icon: newIcon, name: newName }),
+          }
+        );
+      }
 
-      if (!response.ok) throw new Error("Failed to add language");
+      if (!response.ok) throw new Error("Failed to add/edit language");
 
-      const addedLanguage = await response.json();
-      setLanguages((prev) => [...prev, addedLanguage]);
+      fetchLanguages(); // Refresh list immediately
+      window.dispatchEvent(new Event("languageUpdated")); // Notify other components
 
+      // Reset form
       setNewIcon("");
       setNewName("");
+      setEditMode(false);
+      setEditingLanguageId(null);
+    } catch (error) {
+      console.error("Error adding/editing language:", error);
+    }
+  };
 
-      // Notify LanguagesSection.tsx to refresh immediately
+  const handleRemoveLanguage = async (id: number) => {
+    if (!window.confirm(t("confirm_delete_language"))) return;
+
+    try {
+      await fetch(
+        `https://portfolio-hichem-benzair.onrender.com/api/languages/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
+      fetchLanguages(); // Refresh after deletion
       window.dispatchEvent(new Event("languageUpdated"));
     } catch (error) {
-      console.error("Error adding language:", error);
+      console.error("Error deleting language:", error);
     }
   };
 
@@ -458,75 +488,36 @@ const AdminTestimonials: React.FC = () => {
       {/* Languages Management */}
       <div className="admin-languages">
         <h2>{t("admin_languages")}</h2>
+        <form onSubmit={handleAddOrEditLanguage} className="add-language-form">
+          <h3>{editMode ? t("edit_language") : t("add_language")}</h3>
+          <input
+            type="text"
+            value={newIcon}
+            onChange={(e) => setNewIcon(e.target.value)}
+            placeholder="Icon URL"
+          />
+          <input
+            type="text"
+            value={newName}
+            onChange={(e) => setNewName(e.target.value)}
+            placeholder="Language Name"
+          />
+          <button type="submit">{editMode ? t("update") : t("add")}</button>
+        </form>
         <div className="languages-list">
           {languages.map((langItem) => (
             <div key={langItem.id} className="language-item">
-              <img
-                src={langItem.icon}
-                alt={`${t(langItem.name)} Icon`}
-                className="icon"
-              />
+              <img src={langItem.icon} alt={`${t(langItem.name)} Icon`} className="icon" />
               <span className="icon-label">{t(langItem.name)}</span>
-              <button
-                className="remove-btn"
-                onClick={() => deleteTestimonial(langItem.id)}
-              >
+              <button onClick={() => handleRemoveLanguage(langItem.id)}>
                 {t("remove")}
               </button>
-              <button
-                className="edit-btn"
-                onClick={() => handleEditLanguage(langItem)}
-                style={{ marginLeft: "8px" }}
-              >
+              <button onClick={() => handleEditLanguage(langItem)}>
                 {t("edit")}
               </button>
             </div>
           ))}
         </div>
-        <form onSubmit={handleAddLanguage} className="add-language-form">
-          <h3>{editMode ? t("edit_language") : t("add_language")}</h3>
-          <div className="form-group">
-            <label>{t("language_icon_url")}</label>
-            <input
-              type="text"
-              value={newIcon}
-              onChange={(e) => setNewIcon(e.target.value)}
-              placeholder="https://..."
-            />
-          </div>
-          <div className="form-group">
-            <label>{t("language_name")}</label>
-            <input
-              type="text"
-              value={newName}
-              onChange={(e) => setNewName(e.target.value)}
-              placeholder={t("language_name_placeholder") as string}
-            />
-          </div>
-          {editMode ? (
-            <div>
-              <button type="submit" className="add-btn">
-                {t("update")}
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setEditMode(false);
-                  setEditingLanguageId(null);
-                  setNewIcon("");
-                  setNewName("");
-                }}
-                style={{ marginLeft: "8px" }}
-              >
-                {t("cancel")}
-              </button>
-            </div>
-          ) : (
-            <button type="submit" className="add-btn">
-              {t("add")}
-            </button>
-          )}
-        </form>
       </div>
     </div>
   );
