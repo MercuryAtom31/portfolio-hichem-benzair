@@ -231,7 +231,6 @@
 
 
 
-
 import React, { useEffect, useState } from "react";
 import "./Languages.css";
 
@@ -259,6 +258,7 @@ const LanguagesSection: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   const fetchLanguages = () => {
+    setLoading(true);
     fetch("https://portfolio-hichem-benzair.onrender.com/api/languages")
       .then((res) => {
         if (!res.ok) {
@@ -279,18 +279,23 @@ const LanguagesSection: React.FC = () => {
 
   useEffect(() => {
     fetchLanguages();
-
+    
     // Listen for language updates from AdminTestimonials.tsx
-    const handleUpdate = () => fetchLanguages();
+    const handleUpdate = (event: Event) => {
+      console.log("Language update detected", (event as CustomEvent).detail);
+      fetchLanguages();
+    };
+    
+    // Use addEventListener and removeEventListener for proper cleanup
     window.addEventListener("languageUpdated", handleUpdate);
-
+    
     return () => {
       window.removeEventListener("languageUpdated", handleUpdate);
     };
   }, []);
 
-  if (loading) return <div>Loading languages...</div>;
-  if (error) return <div>{error}</div>;
+  if (loading && languages.length === 0) return <div>Loading languages...</div>;
+  if (error && languages.length === 0) return <div>{error}</div>;
 
   return (
     <section className="languages-section">
