@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/projects")
-@CrossOrigin(origins = "*") // Allow frontend access
+@CrossOrigin(origins = "*", allowedHeaders = "*") // Allow frontend access
 public class ProjectController {
 
     private final ProjectService projectService;
