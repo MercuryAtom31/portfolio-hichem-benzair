@@ -141,10 +141,6 @@
 
 
 
-
-
-
-
 // import React, { useEffect, useState } from "react";
 // import "./Languages.css";
 
@@ -154,64 +150,17 @@
 //   name: string;
 // }
 
+// // ✅ Dynamically duplicate each language icon 5 times
 // const renderRow = (items: LanguageItem[], reverse: boolean = false) => (
 //   <div className={`row infinite-scroll ${reverse ? "reverse" : ""}`}>
-//     {items.map((item) => (
-//       <div key={item.id} className="icon-container">
+//     {[...items, ...items, ...items, ...items, ...items].map((item, index) => (
+//       <div key={`${item.id}-${index}`} className="icon-container">
 //         <img src={item.icon} alt={`${item.name} Icon`} className="icon" />
 //         <span className="icon-label">{item.name}</span>
 //       </div>
 //     ))}
 //   </div>
 // );
-
-// // const LanguagesSection: React.FC = () => {
-// //   const [languages, setLanguages] = useState<LanguageItem[]>([]);
-// //   const [loading, setLoading] = useState(true);
-// //   const [error, setError] = useState<string | null>(null);
-
-// //   useEffect(() => {
-// //     fetch("https://portfolio-hichem-benzair.onrender.com/api/languages")
-// //       .then((res) => {
-// //         if (!res.ok) {
-// //           throw new Error(`HTTP error! Status: ${res.status}`);
-// //         }
-// //         return res.json();
-// //       })
-// //       .then((data) => {
-// //         setLanguages(data);
-// //         setLoading(false);
-// //       })
-// //       .catch((error) => {
-// //         console.error("Error fetching languages:", error);
-// //         setError("Failed to load languages.");
-// //         setLoading(false);
-// //       });
-// //   }, []);
-
-// //   if (loading) return <div>Loading languages...</div>;
-// //   if (error) return <div>{error}</div>;
-
-// //   return (
-// //     <section className="languages-section">
-// //       {languages.length > 0 ? (
-// //         <>
-// //           {renderRow(languages.slice(0, 5))}
-// //           {languages.length > 5 && renderRow(languages.slice(5, 10), true)}
-// //           {languages.length > 10 && renderRow(languages.slice(10, 15))}
-// //         </>
-// //       ) : (
-// //         <p>No languages found.</p>
-// //       )}
-// //     </section>
-// //   );
-// // };
-
-// // export default LanguagesSection;
-
-
-
-
 
 // const LanguagesSection: React.FC = () => {
 //   const [languages, setLanguages] = useState<LanguageItem[]>([]);
@@ -241,9 +190,9 @@
 //     fetchLanguages();
 //   }, []);
 
-//   // ✅ Allow AdminTestimonials.tsx to trigger a refresh
+//   // ✅ Refresh the list every 5 seconds to capture new additions
 //   useEffect(() => {
-//     const interval = setInterval(fetchLanguages, 5000); // Refresh every 5s (optional)
+//     const interval = setInterval(fetchLanguages, 5000);
 //     return () => clearInterval(interval);
 //   }, []);
 
@@ -254,9 +203,8 @@
 //     <section className="languages-section">
 //       {languages.length > 0 ? (
 //         <>
-//           {renderRow(languages.slice(0, 10))} {/* ✅ Increased number of displayed icons */}
-//           {languages.length > 10 && renderRow(languages.slice(10, 20), true)}
-//           {languages.length > 20 && renderRow(languages.slice(20, 30))}
+//           {renderRow(languages)}
+//           {renderRow(languages, true)}
 //         </>
 //       ) : (
 //         <p>No languages found.</p>
@@ -265,6 +213,7 @@
 //   );
 // };
 
+// export default LanguagesSection;
 
 
 
@@ -292,7 +241,7 @@ interface LanguageItem {
   name: string;
 }
 
-// ✅ Dynamically duplicate each language icon 5 times
+// Function to dynamically duplicate each language icon 5 times
 const renderRow = (items: LanguageItem[], reverse: boolean = false) => (
   <div className={`row infinite-scroll ${reverse ? "reverse" : ""}`}>
     {[...items, ...items, ...items, ...items, ...items].map((item, index) => (
@@ -330,12 +279,14 @@ const LanguagesSection: React.FC = () => {
 
   useEffect(() => {
     fetchLanguages();
-  }, []);
 
-  // ✅ Refresh the list every 5 seconds to capture new additions
-  useEffect(() => {
-    const interval = setInterval(fetchLanguages, 5000);
-    return () => clearInterval(interval);
+    // Listen for language updates from AdminTestimonials.tsx
+    const handleUpdate = () => fetchLanguages();
+    window.addEventListener("languageUpdated", handleUpdate);
+
+    return () => {
+      window.removeEventListener("languageUpdated", handleUpdate);
+    };
   }, []);
 
   if (loading) return <div>Loading languages...</div>;
@@ -356,4 +307,3 @@ const LanguagesSection: React.FC = () => {
 };
 
 export default LanguagesSection;
-
