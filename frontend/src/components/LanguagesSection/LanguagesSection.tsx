@@ -145,6 +145,144 @@
 
 
 
+// import React, { useEffect, useState } from "react";
+// import "./Languages.css";
+
+// interface LanguageItem {
+//   id: number;
+//   icon: string;
+//   name: string;
+// }
+
+// const renderRow = (items: LanguageItem[], reverse: boolean = false) => (
+//   <div className={`row infinite-scroll ${reverse ? "reverse" : ""}`}>
+//     {items.map((item) => (
+//       <div key={item.id} className="icon-container">
+//         <img src={item.icon} alt={`${item.name} Icon`} className="icon" />
+//         <span className="icon-label">{item.name}</span>
+//       </div>
+//     ))}
+//   </div>
+// );
+
+// // const LanguagesSection: React.FC = () => {
+// //   const [languages, setLanguages] = useState<LanguageItem[]>([]);
+// //   const [loading, setLoading] = useState(true);
+// //   const [error, setError] = useState<string | null>(null);
+
+// //   useEffect(() => {
+// //     fetch("https://portfolio-hichem-benzair.onrender.com/api/languages")
+// //       .then((res) => {
+// //         if (!res.ok) {
+// //           throw new Error(`HTTP error! Status: ${res.status}`);
+// //         }
+// //         return res.json();
+// //       })
+// //       .then((data) => {
+// //         setLanguages(data);
+// //         setLoading(false);
+// //       })
+// //       .catch((error) => {
+// //         console.error("Error fetching languages:", error);
+// //         setError("Failed to load languages.");
+// //         setLoading(false);
+// //       });
+// //   }, []);
+
+// //   if (loading) return <div>Loading languages...</div>;
+// //   if (error) return <div>{error}</div>;
+
+// //   return (
+// //     <section className="languages-section">
+// //       {languages.length > 0 ? (
+// //         <>
+// //           {renderRow(languages.slice(0, 5))}
+// //           {languages.length > 5 && renderRow(languages.slice(5, 10), true)}
+// //           {languages.length > 10 && renderRow(languages.slice(10, 15))}
+// //         </>
+// //       ) : (
+// //         <p>No languages found.</p>
+// //       )}
+// //     </section>
+// //   );
+// // };
+
+// // export default LanguagesSection;
+
+
+
+
+
+// const LanguagesSection: React.FC = () => {
+//   const [languages, setLanguages] = useState<LanguageItem[]>([]);
+//   const [loading, setLoading] = useState(true);
+//   const [error, setError] = useState<string | null>(null);
+
+//   const fetchLanguages = () => {
+//     fetch("https://portfolio-hichem-benzair.onrender.com/api/languages")
+//       .then((res) => {
+//         if (!res.ok) {
+//           throw new Error(`HTTP error! Status: ${res.status}`);
+//         }
+//         return res.json();
+//       })
+//       .then((data) => {
+//         setLanguages(data);
+//         setLoading(false);
+//       })
+//       .catch((error) => {
+//         console.error("Error fetching languages:", error);
+//         setError("Failed to load languages.");
+//         setLoading(false);
+//       });
+//   };
+
+//   useEffect(() => {
+//     fetchLanguages();
+//   }, []);
+
+//   // ✅ Allow AdminTestimonials.tsx to trigger a refresh
+//   useEffect(() => {
+//     const interval = setInterval(fetchLanguages, 5000); // Refresh every 5s (optional)
+//     return () => clearInterval(interval);
+//   }, []);
+
+//   if (loading) return <div>Loading languages...</div>;
+//   if (error) return <div>{error}</div>;
+
+//   return (
+//     <section className="languages-section">
+//       {languages.length > 0 ? (
+//         <>
+//           {renderRow(languages.slice(0, 10))} {/* ✅ Increased number of displayed icons */}
+//           {languages.length > 10 && renderRow(languages.slice(10, 20), true)}
+//           {languages.length > 20 && renderRow(languages.slice(20, 30))}
+//         </>
+//       ) : (
+//         <p>No languages found.</p>
+//       )}
+//     </section>
+//   );
+// };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import React, { useEffect, useState } from "react";
 import "./Languages.css";
 
@@ -154,10 +292,11 @@ interface LanguageItem {
   name: string;
 }
 
+// ✅ Dynamically duplicate each language icon 5 times
 const renderRow = (items: LanguageItem[], reverse: boolean = false) => (
   <div className={`row infinite-scroll ${reverse ? "reverse" : ""}`}>
-    {items.map((item) => (
-      <div key={item.id} className="icon-container">
+    {[...items, ...items, ...items, ...items, ...items].map((item, index) => (
+      <div key={`${item.id}-${index}`} className="icon-container">
         <img src={item.icon} alt={`${item.name} Icon`} className="icon" />
         <span className="icon-label">{item.name}</span>
       </div>
@@ -170,7 +309,7 @@ const LanguagesSection: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
+  const fetchLanguages = () => {
     fetch("https://portfolio-hichem-benzair.onrender.com/api/languages")
       .then((res) => {
         if (!res.ok) {
@@ -187,6 +326,16 @@ const LanguagesSection: React.FC = () => {
         setError("Failed to load languages.");
         setLoading(false);
       });
+  };
+
+  useEffect(() => {
+    fetchLanguages();
+  }, []);
+
+  // ✅ Refresh the list every 5 seconds to capture new additions
+  useEffect(() => {
+    const interval = setInterval(fetchLanguages, 5000);
+    return () => clearInterval(interval);
   }, []);
 
   if (loading) return <div>Loading languages...</div>;
@@ -196,9 +345,8 @@ const LanguagesSection: React.FC = () => {
     <section className="languages-section">
       {languages.length > 0 ? (
         <>
-          {renderRow(languages.slice(0, 5))}
-          {languages.length > 5 && renderRow(languages.slice(5, 10), true)}
-          {languages.length > 10 && renderRow(languages.slice(10, 15))}
+          {renderRow(languages)}
+          {renderRow(languages, true)}
         </>
       ) : (
         <p>No languages found.</p>
@@ -208,3 +356,4 @@ const LanguagesSection: React.FC = () => {
 };
 
 export default LanguagesSection;
+
