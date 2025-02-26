@@ -19,3 +19,11 @@ CREATE TABLE IF NOT EXISTS languages (
     name VARCHAR(100) NOT NULL UNIQUE,
     icon TEXT NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS projects (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    value VARCHAR(100) NOT NULL,
+    url VARCHAR(500) NOT NULL,
+    image_path VARCHAR(500) NOT NULL  -- ✅ Stores the file path instead of Base64
+);

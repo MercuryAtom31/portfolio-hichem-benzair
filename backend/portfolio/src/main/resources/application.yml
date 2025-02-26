@@ -41,6 +41,11 @@ spring:
   profiles:
     active: ${SPRING_PROFILES_ACTIVE:dev}
 
+  web:
+    resources:
+      static-locations: classpath:/static/
+
+
 # Development configuration (dev)
 ---
 spring:

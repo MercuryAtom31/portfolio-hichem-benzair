@@ -27,11 +27,12 @@ INSERT INTO languages (name, icon) VALUES ('Xcode', 'https://raw.githubuserconte
 INSERT INTO languages (name, icon) VALUES ('React', 'https://raw.githubusercontent.com/devicons/devicon/develop/icons/react/react-original.svg');
 INSERT INTO languages (name, icon) VALUES ('Docker', 'https://raw.githubusercontent.com/devicons/devicon/develop/icons/docker/docker-original.svg');
 
-
-
-
-
-
+INSERT INTO projects (title, value, url, image_path) VALUES
+('C Clean Inc.', 'ccleaninc', 'https://github.com/ThomasBedard/ccleaninc', '/images/ccleaninc.png'),
+('GeoCache Explorer', 'geocache', 'https://github.com/MercuryAtom31/GeoCache-Explore-Android-Application/tree/main', '/images/geocache.png'),
+('PetClinic', 'petclinic', 'https://github.com/cgerard321/champlain_petclinic', '/images/petclinic.png'),
+('Contact Manager', 'contactmanager', 'https://github.com/MercuryAtom31/.NET_Final_Project_Contact_Manager_Application', '/images/contactmanager.png'),
+('Weather App', 'weatherapp', 'https://github.com/MercuryAtom31/WeatherApp-Final-Project', '/images/weatherapp.png');
 
 
 
