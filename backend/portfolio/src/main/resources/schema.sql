@@ -13,3 +13,9 @@ CREATE TABLE IF NOT EXISTS testimonials (
     message TEXT NOT NULL,
     approved BOOLEAN DEFAULT FALSE
 );
+
+CREATE TABLE IF NOT EXISTS languages (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    icon TEXT NOT NULL
+);
