@@ -1,35 +1,87 @@
 @import url("https://fonts.googleapis.com/css2?family=Carter+One&display=swap");
 
+/* 
+   1) Main container styling to mimic the neon/dark look.
+   - background: semi-transparent black
+   - neon border & box-shadow
+   - text color white
+   - optional diagonal clip-path
+*/
+
 .languages-section {
-  background-color: white;
-  padding: 50px 0;
+  margin: 20px;
+  padding: 20px;
+
+  /* Neon/dark background + blur effect */
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  /* Neon border & glow */
+  border: 1px solid rgba(0, 255, 255, 0.7);
+  box-shadow: 
+    0 0 20px rgba(0, 255, 255, 0.5),
+    0 0 40px rgba(255, 0, 255, 0.4);
+
+  border-radius: 15px;
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+
+  /* Diagonal shape from your original code */
+  position: relative;
+  clip-path: polygon(0% 15%, 100% 5%, 100% 85%, 0% 95%);
+
+  /* Spacing & layout */
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  gap: 40px; /* Spacing between rows */
-  position: relative;
-  clip-path: polygon(0% 15%, 100% 5%, 100% 85%, 0% 95%); /* Diagonal shape */
-  border-top-right-radius: 300px; /* Rounded top-right corner */
-  border-bottom-left-radius: 300px; /* Rounded bottom-left corner */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional for better aesthetics */
+  gap: 40px; /* Space between top & bottom row */
+
+  /* Optional fade-in animation (like testimonials) */
+  animation: fadeIn 1s ease-in-out;
 }
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 
+   2) Rows for infinite scrolling.
+   We keep your original logic but add 
+   a bit of neon “feel” if desired.
+*/
 
 .row {
   display: flex;
   align-items: center;
   gap: 60px; /* Spacing between icons */
   will-change: transform;
+  animation: scroll 300s linear infinite; /* Slower scroll for demonstration */
 }
 
 .row.reverse {
   flex-direction: row-reverse;
+  animation: scroll-reverse 300s linear infinite;
 }
+
+/* 
+   3) Icon container & hover effects
+   Retain your original approach, but shift to neon colors
+*/
 
 .icon-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 8px;
+  transition: transform 0.3s ease;
 }
 
 .icon {
@@ -39,37 +91,34 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+/* Slight neon hover effect */
 .icon:hover {
-  transform: scale(1.2); /* Slightly enlarge on hover */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Add shadow on hover */
+  transform: scale(1.2);
+  box-shadow: 0 4px 10px rgba(0, 255, 255, 0.6);
 }
 
+/* Label styling to match the neon text color scheme */
 .icon-label {
   font-family: "Carter One", cursive;
   font-size: 14px;
-  color: #333;
+  color: #fff;
   transition: color 0.3s ease;
 }
 
 .icon-container:hover .icon-label {
-  color: #007acc; /* Change label color on hover */
+  color: #00cccc; /* Neon color on hover */
 }
 
-.infinite-scroll {
-  display: flex;
-  animation: scroll 300s linear infinite; /* Slower scroll */
-}
-
-.infinite-scroll.reverse {
-  animation: scroll-reverse 300s linear infinite; /* Slower reverse scroll */
-}
-
+/* 
+   4) Keyframes for infinite scrolling
+   (kept from your original code)
+*/
 @keyframes scroll {
   from {
     transform: translateX(0);
   }
   to {
-    transform: translateX(-100%); /* Infinite loop */
+    transform: translateX(-100%);
   }
 }
 
@@ -78,6 +127,6 @@
     transform: translateX(0);
   }
   to {
-    transform: translateX(100%); /* Infinite loop */
+    transform: translateX(100%);
   }
 }
