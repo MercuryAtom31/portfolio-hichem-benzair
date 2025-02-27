@@ -1,4 +1,4 @@
-// import React, { useState } from "react";
+// import React, { useState, useEffect, useRef } from "react";
 // import { Link, useNavigate } from "react-router-dom";
 // import { signOut, User } from "firebase/auth";
 // import { auth } from "../../firebaseConfig";
@@ -17,6 +17,9 @@
 //   const [isOpen, setIsOpen] = useState(false);
 //   const navigate = useNavigate();
 
+//   const menuRef = useRef<HTMLDivElement>(null);
+//   const buttonRef = useRef<HTMLButtonElement>(null);
+
 //   const handleLogout = async () => {
 //     await signOut(auth);
 //     navigate("/");
@@ -27,20 +30,50 @@
 //     localStorage.setItem("language", lang);
 //   };
 
+//   useEffect(() => {
+//     const handleClickOutside = (event: MouseEvent) => {
+//       // Only run if the menu is open AND screen width is below the 'lg' breakpoint
+//       if (isOpen && window.innerWidth < 1024) {
+//         if (
+//           menuRef.current &&
+//           !menuRef.current.contains(event.target as Node) &&
+//           buttonRef.current &&
+//           !buttonRef.current.contains(event.target as Node)
+//         ) {
+//           setIsOpen(false);
+//         }
+//       }
+//     };
+
+//     if (isOpen) {
+//       document.addEventListener("mousedown", handleClickOutside);
+//     } else {
+//       document.removeEventListener("mousedown", handleClickOutside);
+//     }
+
+//     return () => {
+//       document.removeEventListener("mousedown", handleClickOutside);
+//     };
+//   }, [isOpen]);
+
 //   return (
 //     <nav className="bg-gray-900 text-white fixed w-full z-50 shadow-md">
 //       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 //         <div className="flex justify-between items-center h-16">
 //           <div className="text-2xl font-bold glitch">Hichem A. Benzaïr</div>
 
+//           {/* Hamburger Button */}
 //           <button
+//             ref={buttonRef}
 //             onClick={() => setIsOpen(!isOpen)}
 //             className="lg:hidden text-white focus:outline-none"
 //           >
 //             {isOpen ? "✖" : "☰"}
 //           </button>
 
+//           {/* Menu Container */}
 //           <div
+//             ref={menuRef}
 //             className={`lg:flex space-x-6 ${
 //               isOpen ? "block" : "hidden"
 //             } lg:block absolute lg:static top-16 left-0 w-full bg-gray-900 lg:w-auto lg:bg-transparent text-center lg:text-left`}
@@ -114,7 +147,6 @@
 //                   className="inline-block h-6 w-6"
 //                 />
 //               </button>
-
 //               <button onClick={() => changeLanguage("fr")}>
 //                 <img
 //                   src={FranceFlag}
@@ -239,9 +271,13 @@ const Navbar: React.FC<NavbarProps> = ({ user }) => {
           {/* Menu Container */}
           <div
             ref={menuRef}
-            className={`lg:flex space-x-6 ${
-              isOpen ? "block" : "hidden"
-            } lg:block absolute lg:static top-16 left-0 w-full bg-gray-900 lg:w-auto lg:bg-transparent text-center lg:text-left`}
+            className={`
+              ${isOpen ? "flex flex-col items-center space-y-4" : "hidden"}
+              lg:flex lg:flex-row lg:items-center lg:justify-start lg:space-x-6 lg:space-y-0
+              absolute lg:static top-16 left-0 w-full bg-gray-900
+              lg:w-auto lg:bg-transparent
+              text-center lg:text-left
+            `}
           >
             {[
               { label: t("Home"), link: "/", internal: true },
