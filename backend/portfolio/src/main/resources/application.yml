@@ -84,7 +84,7 @@ spring:
     database-platform: org.hibernate.dialect.MySQL8Dialect
   sql:
     init:
-      mode: always
+      mode: never # do not re-run schema/data on every deploy
 
 # Docker configuration (docker)
 ---
