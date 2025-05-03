@@ -173,3 +173,12 @@
   color: #ff4d4f;
   margin-top: 10px;
 }
+
+.login-container form {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.6); /* slightly dark background */
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, setPersistence, browserSessionPersistence } from "firebase/auth";
 import { auth } from "../firebaseConfig";
 import { useNavigate } from "react-router-dom"; 
 import "./Login.css";
@@ -13,6 +13,7 @@ const Login: React.FC = () => {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
+      await setPersistence(auth, browserSessionPersistence);
       await signInWithEmailAndPassword(auth, email, password);
       setError("");
       navigate("/"); 
@@ -23,12 +24,9 @@ const Login: React.FC = () => {
 
   return (
     <div className="login-page">
-      {/* Glitch Effect Name */}
       <h1 className="glitch login-glitch" data-text="Hichem A. Benzaïr">
         Hichem A. Benzaïr
       </h1>
-
-      {/* Login Box */}
       <div className="login-container">
         <h2>Admin Login</h2>
         <form onSubmit={handleLogin}>

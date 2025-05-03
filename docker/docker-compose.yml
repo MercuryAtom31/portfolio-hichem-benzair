@@ -32,6 +32,7 @@ services:
       DB_NAME: portfoliodb
       DB_USER: user
       DB_PASSWORD: pwd
+      ALLOWED_ORIGINS: http://localhost,http://localhost:5173,https://portfolio-hichem-benzair-frontend.onrender.com
     depends_on:
       database:
         condition: service_healthy
