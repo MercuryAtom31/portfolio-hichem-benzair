@@ -3,8 +3,13 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: turquoise;
-}
+    background-image: url("/graffiti-1874452_1920.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 50px 20px;
+  }
+  
 
 form {
     max-width: 600px;
