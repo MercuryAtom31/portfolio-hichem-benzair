@@ -11,7 +11,7 @@ const HeroSection: React.FC = () => {
             <div className="hero-content">
                 <h1 className="hero-title">{t("greeting")}</h1>
                 <h2 className="hero-subtitle">{t("welcome")}</h2>
-                <p className="hero-tagline">{t("unleashing_creativity")}</p>
+                {/* <p className="hero-tagline">{t("unleashing_creativity")}</p> */}
 
                 {/* Download Resume Button */}
                 <a 

@@ -57,12 +57,13 @@
 
 .infinite-scroll {
   display: flex;
-  animation: scroll 300s linear infinite; /* Slower scroll */
+  animation: scroll 60s linear infinite;
 }
 
 .infinite-scroll.reverse {
-  animation: scroll-reverse 300s linear infinite; /* Slower reverse scroll */
+  animation: scroll-reverse 60s linear infinite;
 }
+
 
 @keyframes scroll {
   from {
@@ -81,3 +82,13 @@
     transform: translateX(100%); /* Infinite loop */
   }
 }
+
+.languages-title {
+  font-family: "Carter One", cursive;
+  font-size: 2rem;
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
