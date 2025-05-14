@@ -46,16 +46,16 @@ const LanguagesSection: React.FC = () => {
 
   useEffect(() => {
     fetchLanguages();
-    
+
     // Listen for language updates from AdminTestimonials.tsx
     const handleUpdate = (event: Event) => {
       console.log("Language update detected", (event as CustomEvent).detail);
       fetchLanguages();
     };
-    
+
     // Use addEventListener and removeEventListener for proper cleanup
     window.addEventListener("languageUpdated", handleUpdate);
-    
+
     return () => {
       window.removeEventListener("languageUpdated", handleUpdate);
     };
@@ -66,14 +66,16 @@ const LanguagesSection: React.FC = () => {
 
   return (
     <section className="languages-section">
-      {languages.length > 0 ? (
+      <h2 className="languages-title">Tech Stack</h2>
+      {/* {languages.length > 0 ? (
         <>
           {renderRow(languages)}
           {renderRow(languages, true)}
         </>
       ) : (
         <p>No languages found.</p>
-      )}
+      )} */}
+      {languages.length > 0 ? renderRow(languages) : <p>No languages found.</p>}
     </section>
   );
 };

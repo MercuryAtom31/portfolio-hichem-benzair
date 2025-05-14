@@ -293,12 +293,12 @@ const Navbar: React.FC<NavbarProps> = ({ user }) => {
                 link: "https://github.com/MercuryAtom31",
                 internal: false,
               },
-              {
-                label: t("Udemy"),
-                link: "https://www.udemy.com/course/essential-tips-for-new-computer-science-students/?utm_source=adwords&utm_medium=udemyads&utm_campaign=Search_DSA_GammaCatchall_NonP_la.EN_cc.CA&campaigntype=Search&portfolio=Canada&language=EN&product=Course&test=&audience=DSA&topic=&priority=Gamma&utm_content=deal4584&utm_term=_._ag_160250050302_._ad_700948785488_._kw__._de_c_._dm__._pl__._ti_aud-2268488108639:dsa-1456167871416_._li_9000561_._pd__._&matchtype=&gad_source=1&gbraid=0AAAAADROdO3IShDCiEOlH_Ei7yBU2xnbe&gclid=CjwKCAiAlPu9BhAjEiwA5NDSA3Mr5iGP1VFZDpkPrxgfBJz21ZqKkwHhlrHQw9CufXtYa6dC6kRi7RoCQOEQAvD_BwE",
-                internal: false,
-              },
-              { label: t("Youtube"), link: "/videos", internal: true },
+              // {
+              //   label: t("Udemy"),
+              //   link: "https://www.udemy.com/course/essential-tips-for-new-computer-science-students/?utm_source=adwords&utm_medium=udemyads&utm_campaign=Search_DSA_GammaCatchall_NonP_la.EN_cc.CA&campaigntype=Search&portfolio=Canada&language=EN&product=Course&test=&audience=DSA&topic=&priority=Gamma&utm_content=deal4584&utm_term=_._ag_160250050302_._ad_700948785488_._kw__._de_c_._dm__._pl__._ti_aud-2268488108639:dsa-1456167871416_._li_9000561_._pd__._&matchtype=&gad_source=1&gbraid=0AAAAADROdO3IShDCiEOlH_Ei7yBU2xnbe&gclid=CjwKCAiAlPu9BhAjEiwA5NDSA3Mr5iGP1VFZDpkPrxgfBJz21ZqKkwHhlrHQw9CufXtYa6dC6kRi7RoCQOEQAvD_BwE",
+              //   internal: false,
+              // },
+              // { label: t("Youtube"), link: "/videos", internal: true },
             ].map((item, index) =>
               item.internal ? (
                 <Link to={item.link} key={index} className="link">
