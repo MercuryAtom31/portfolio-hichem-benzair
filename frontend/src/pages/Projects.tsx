@@ -81,6 +81,23 @@ const projectImages = [
       </div>
     ),
   },
+  {
+    title: "Portfolio Website",
+    value: "portfolio",
+    url: "https://github.com/MercuryAtom31/portfolio-hichem-benzair",
+    content: (
+      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#00c6ff] to-[#0072ff] shadow-lg p-1">
+        <video
+          src="/videos/portfolio_website.mov"
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="rounded-xl w-full h-[500px] object-cover"
+        />
+      </div>
+    ),
+  },  
 ];
 
 const Projects = () => {
