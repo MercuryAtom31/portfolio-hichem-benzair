@@ -168,14 +168,11 @@ const Navbar: React.FC<NavbarProps> = ({ user }) => {
             {/* Authentication Buttons */}
             <div className="mt-2 lg:mt-0 text-center lg:text-left">
               {user ? (
-                <button
-                  onClick={handleLogout}
-                  className="bg-red-500 px-4 py-2 rounded"
-                >
+                <button onClick={handleLogout} className="animated-border-btn">
                   {t("logout")}
                 </button>
               ) : (
-                <Link to="/login" className="bg-green-500 px-4 py-2 rounded">
+                <Link to="/login" className="animated-border-btn">
                   {t("login")}
                 </Link>
               )}
