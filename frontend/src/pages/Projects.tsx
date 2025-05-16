@@ -14,14 +14,17 @@ const projectImages = [
     url: "https://github.com/ThomasBedard/ccleaninc",
     content: (
       <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#f7971e] to-[#ffd200] shadow-lg p-1">
-        <img
-          src={ccleaninc}
-          alt="C Clean Inc."
-          className="rounded-xl w-full h-[500px] object-cover"
+        <video
+          src="/videos/cclean.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="rounded-xl w-full h-[500px] object-contain"
         />
       </div>
     ),
-  },
+  },  
   {
     title: "Weather App",
     value: "weatherapp",
@@ -31,7 +34,7 @@ const projectImages = [
         <img
           src={weatherApp}
           alt="Weather App"
-          className="rounded-xl w-full h-[500px] object-cover"
+          className="rounded-xl w-full h-[500px] object-contain"
         />
       </div>
     ),
@@ -45,7 +48,7 @@ const projectImages = [
         <img
           src={geocache}
           alt="GeoCache Explorer"
-          className="rounded-xl w-full h-[500px] object-cover"
+          className="rounded-xl w-full h-[500px] object-contain"
         />
       </div>
     ),
@@ -59,7 +62,7 @@ const projectImages = [
         <img
           src={petclinic}
           alt="PetClinic"
-          className="rounded-xl w-full h-[500px] object-cover"
+          className="rounded-xl w-full h-[500px] object-contain"
         />
       </div>
     ),
@@ -76,7 +79,7 @@ const projectImages = [
           loop
           muted
           playsInline
-          className="rounded-xl w-full h-[500px] object-cover"
+          className="rounded-xl w-full h-[500px] object-contain"
         />
       </div>
     ),
@@ -93,7 +96,7 @@ const projectImages = [
           loop
           muted
           playsInline
-          className="rounded-xl w-full h-[500px] object-cover"
+          className="rounded-xl w-full h-[500px] object-contain"
         />
       </div>
     ),

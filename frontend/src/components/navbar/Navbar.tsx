@@ -93,7 +93,7 @@ const Navbar: React.FC<NavbarProps> = ({ user }) => {
               { label: t("Contact Me"), link: "/contact", internal: true },
               {
                 label: t("LinkedIn"),
-                link: "https://www.linkedin.com/in/hichem-a-benzair",
+                link: "https://www.linkedin.com/in/hichem-benzair",
                 internal: false,
               },
               {

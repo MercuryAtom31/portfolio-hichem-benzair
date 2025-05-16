@@ -24,11 +24,10 @@ const Login: React.FC = () => {
 
   return (
     <div className="login-page">
-      <h1 className="glitch login-glitch" data-text="Hichem A. Benzaïr">
-        Hichem A. Benzaïr
+      <h1 className="glitch login-glitch" data-text="Admin Login">
+        Admin Login
       </h1>
       <div className="login-container">
-        <h2>Admin Login</h2>
         <form onSubmit={handleLogin}>
           <input
             type="email"
