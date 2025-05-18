@@ -1,17 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Carter+One&display=swap");
 
 .languages-section {
-  background-color: white;
+  background-color: transparent;
   padding: 50px 0;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   gap: 40px; /* Spacing between rows */
   position: relative;
-  clip-path: polygon(0% 15%, 100% 5%, 100% 85%, 0% 95%); /* Diagonal shape */
-  border-top-right-radius: 300px; /* Rounded top-right corner */
-  border-bottom-left-radius: 300px; /* Rounded bottom-left corner */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional for better aesthetics */
 }
 
 .row {
@@ -37,22 +33,27 @@
   height: 50px;
   object-fit: contain;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  /* Added a subtle glow effect to make icons stand out against dark background */
+  filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.3));
 }
 
 .icon:hover {
   transform: scale(1.2); /* Slightly enlarge on hover */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Add shadow on hover */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Added shadow on hover */
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
 }
 
 .icon-label {
   font-family: "Carter One", cursive;
   font-size: 14px;
-  color: #333;
+  /* Changed the color to make it visible on dark background */
+  color: #ffffff;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
   transition: color 0.3s ease;
 }
 
 .icon-container:hover .icon-label {
-  color: #007acc; /* Change label color on hover */
+  color: #00a8ff; /* Changed label color on hover - brighter blue for dark background */
 }
 
 .infinite-scroll {
@@ -63,7 +64,6 @@
 .infinite-scroll.reverse {
   animation: scroll-reverse 60s linear infinite;
 }
-
 
 @keyframes scroll {
   from {
@@ -84,11 +84,59 @@
 }
 
 .languages-title {
+  position: relative;
   font-family: "Carter One", cursive;
   font-size: 2rem;
   text-align: center;
-  color: #333;
+  color: var(--static-color);
   margin-bottom: 20px;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  animation: glitch-cycle 5.2s infinite;
+  text-shadow: none;
 }
 
+.languages-title::before,
+.languages-title::after {
+  content: "Tech Stack";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  color: var(--static-color);
+  background: transparent;
+  clip-path: inset(0 0 50% 0);
+  text-shadow: -2px 0 var(--glitch-color-1);
+  animation: glitch-effect 5.2s infinite;
+  opacity: 0;
+}
+
+.languages-title::after {
+  clip-path: inset(50% 0 0 0);
+  text-shadow: 2px 0 var(--glitch-color-2);
+}
+
+@keyframes glitch-cycle {
+  0%, 83% {
+    color: var(--static-color);
+    text-shadow: none;
+    transform: none;
+  }
+  94%, 100% {
+    color: var(--primary-color);
+    text-shadow: 0 0 15px var(--hover-color), -2px 2px var(--glitch-color-1);
+    transform: skewX(5deg);
+  }
+}
+
+@keyframes glitch-effect {
+  0%, 83% {
+    opacity: 0;
+    transform: translate(0);
+  }
+  94%, 96% {
+    opacity: 1;
+    transform: translate(1px, -1px);
+  }
+  97%, 100% {
+    transform: translate(-1px, 1px) skewX(10deg);
+  }
+}

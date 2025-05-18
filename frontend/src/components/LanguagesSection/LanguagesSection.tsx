@@ -7,7 +7,7 @@ interface LanguageItem {
   name: string;
 }
 
-// Function to dynamically duplicate each language icon 5 times
+// Function to dynamically duplicate each language icon for the infinite scroll
 const renderRow = (items: LanguageItem[], reverse: boolean = false) => (
   <div className={`row infinite-scroll ${reverse ? "reverse" : ""}`}>
     {[...items, ...items, ...items, ...items, ...items].map((item, index) => (
@@ -61,21 +61,20 @@ const LanguagesSection: React.FC = () => {
     };
   }, []);
 
-  if (loading && languages.length === 0) return <div>Loading languages...</div>;
-  if (error && languages.length === 0) return <div>{error}</div>;
+  if (loading && languages.length === 0) return <div className="loading-text">Loading languages...</div>;
+  if (error && languages.length === 0) return <div className="error-text">{error}</div>;
 
   return (
     <section className="languages-section">
       <h2 className="languages-title">Tech Stack</h2>
-      {/* {languages.length > 0 ? (
+      {languages.length > 0 ? (
         <>
           {renderRow(languages)}
-          {renderRow(languages, true)}
+          {renderRow(languages, true)} {/* Adding the second row back for a better visual effect */}
         </>
       ) : (
-        <p>No languages found.</p>
-      )} */}
-      {languages.length > 0 ? renderRow(languages) : <p>No languages found.</p>}
+        <p className="no-languages">No languages found.</p>
+      )}
     </section>
   );
 };

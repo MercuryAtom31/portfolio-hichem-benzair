@@ -2,197 +2,200 @@
 
 /* Shared Border Animation Button Style */
 .animated-border-btn {
-  position: relative;
-  background: none;
-  color: aqua;
-  text-transform: uppercase;
-  text-decoration: none;
-  border: 0.2em solid aqua;
-  padding: 0.5em 1em;
-  font-weight: bold;
-  transition: all 0.45s cubic-bezier(0.86, 0, 0.07, 1);
+position: relative;
+background: none;
+color: aqua;
+text-transform: uppercase;
+text-decoration: none;
+border: 0.2em solid aqua;
+padding: 0.5em 1em;
+font-weight: bold;
+transition: all 0.45s cubic-bezier(0.86, 0, 0.07, 1);
 }
-
 .animated-border-btn::before {
-  content: "";
-  display: block;
-  position: absolute;
-  width: 10%;
-  background: #111;
-  height: 0.3em;
-  right: 20%;
-  top: -0.21em;
-  transform: skewX(-45deg);
-  transition: all 0.45s cubic-bezier(0.86, 0, 0.07, 1);
+content: "";
+display: block;
+position: absolute;
+width: 10%;
+background: #111;
+height: 0.3em;
+right: 20%;
+top: -0.21em;
+transform: skewX(-45deg);
+transition: all 0.45s cubic-bezier(0.86, 0, 0.07, 1);
 }
-
 .animated-border-btn::after {
-  content: "";
-  display: block;
-  position: absolute;
-  width: 10%;
-  background: #111;
-  height: 0.3em;
-  left: 20%;
-  bottom: -0.25em;
-  transform: skewX(45deg);
-  transition: all 0.45s cubic-bezier(0.86, 0, 0.07, 1);
+content: "";
+display: block;
+position: absolute;
+width: 10%;
+background: #111;
+height: 0.3em;
+left: 20%;
+bottom: -0.25em;
+transform: skewX(45deg);
+transition: all 0.45s cubic-bezier(0.86, 0, 0.07, 1);
 }
-
 .animated-border-btn:hover::before {
-  right: 80%;
+right: 80%;
 }
-
 .animated-border-btn:hover::after {
-  left: 80%;
+left: 80%;
 }
-
-
 :root {
-  --primary-color: #00d4ff;
-  --hover-color: #f672ca;
-  --glitch-color-1: rgba(0, 212, 255, 0.8);
-  --glitch-color-2: rgba(246, 114, 202, 0.8);
-  --static-color: white;
+--primary-color: #00d4ff;
+--hover-color: #f672ca;
+--glitch-color-1: rgba(0, 212, 255, 0.8);
+--glitch-color-2: rgba(246, 114, 202, 0.8);
+--static-color: white;
 }
-
 /* General Styles */
 body {
-  font-family: "Quicksand", sans-serif;
-  background: #111;
-  margin: 0;
-  color: var(--static-color);
+font-family: "Quicksand", sans-serif;
+background: #111;
+margin: 0;
+color: var(--static-color);
 }
-
 /* Navbar Styles */
 nav {
-  font-family: "Quicksand", sans-serif;
+font-family: "Quicksand", sans-serif;
 }
-
 /* Glitch Effect for Logo */
 .glitch {
-  position: relative;
-  color: var(--static-color); /* Default static white */
-  font-size: 2rem;
-  font-weight: bold;
-  /* text-transform: uppercase; */
-  animation: glitch-cycle 5.2s infinite;
+position: relative;
+color: var(--static-color); /* Default static white */
+font-size: 2rem;
+font-weight: bold;
+/* text-transform: uppercase; */
+animation: glitch-cycle 5.2s infinite;
 }
-
 .glitch::before,
 .glitch::after {
-  content: "Hichem A. Benzaïr";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: transparent;
-  clip-path: inset(0 0 50% 0);
-  text-shadow: -2px 0 var(--glitch-color-1);
-  animation: glitch-effect 5.2s infinite;
-  opacity: 0;
+content: "Hichem A. Benzaïr";
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: transparent;
+clip-path: inset(0 0 50% 0);
+text-shadow: -2px 0 var(--glitch-color-1);
+animation: glitch-effect 5.2s infinite;
+opacity: 0;
 }
-
 .glitch::after {
-  clip-path: inset(50% 0 0 0);
-  text-shadow: 2px 0 var(--glitch-color-2);
+clip-path: inset(50% 0 0 0);
+text-shadow: 2px 0 var(--glitch-color-2);
 }
-
 @keyframes glitch-cycle {
-  0%, 83% { /* Static phase duration reduced */
-    color: var(--static-color); /* White during static phase */
-    text-shadow: none; /* No shadow during static phase */
-    transform: none;
-  }
-  94%, 100% { /* Glitch phase duration extended */
-    color: var(--primary-color); /* Colored during glitch */
-    text-shadow: 0 0 15px var(--secondary-color), -2px 2px var(--glitch-color-1);
-    transform: skewX(5deg);
-  }
+ 0%, 83% { /* Static phase duration reduced */
+color: var(--static-color); /* White during static phase */
+text-shadow: none; /* No shadow during static phase */
+transform: none;
+ }
+ 94%, 100% { /* Glitch phase duration extended */
+color: var(--primary-color); /* Colored during glitch */
+text-shadow: 0 0 15px var(--secondary-color), -2px 2px var(--glitch-color-1);
+transform: skewX(5deg);
+ }
 }
-
 @keyframes glitch-effect {
-  0%, 83% {
-    opacity: 0;
-    transform: translate(0);
-  }
-  94%, 96% { /* Glitch intensity slightly extended */
-    opacity: 1;
-    transform: translate(1px, -1px);
-  }
-  97%, 100% {
-    transform: translate(-1px, 1px) skewX(10deg);
-  }
+ 0%, 83% {
+opacity: 0;
+transform: translate(0);
+ }
+ 94%, 96% { /* Glitch intensity slightly extended */
+opacity: 1;
+transform: translate(1px, -1px);
+ }
+ 97%, 100% {
+transform: translate(-1px, 1px) skewX(10deg);
+ }
 }
-
-
 /* Wave Effect for Links */
 .link {
-  height: 30px;
-  align-items: center;
-  color: var(--static-color);
-  text-decoration: none;
-  display: flex;
-  position: relative;
-  overflow: hidden;
-  transition: color 0.3s;
+height: 30px;
+align-items: center;
+color: var(--static-color);
+text-decoration: none;
+display: flex;
+position: relative;
+overflow: hidden;
+transition: color 0.3s;
 }
-
 .link:hover {
-  color: var(--primary-color);
+color: var(--primary-color);
 }
-
 .mask {
-  position: relative;
-  padding: 0;
-  height: 20px;
-  overflow: hidden;
+position: relative;
+padding: 0;
+height: 20px;
+overflow: hidden;
 }
-
 .link-container {
-  transition: transform 0.4s ease;
+transition: transform 0.4s ease;
 }
-
 .title {
-  display: block;
-  font-size: 18px;
-  line-height: 20px;
-  transition: transform 0.4s ease;
+display: block;
+font-size: 18px;
+line-height: 20px;
+transition: transform 0.4s ease;
 }
-
 .link-title1 {
-  transform-origin: right center;
+transform-origin: right center;
 }
-
 .link-title2 {
-  transform-origin: left center;
-  transform: rotate(20deg);
+transform-origin: left center;
+transform: rotate(20deg);
 }
-
 /* Hover Action for Links */
 .link:hover .link-container {
-  transform: translateY(-20px);
+transform: translateY(-20px);
 }
-
 .link:hover .link-title1 {
-  transform: rotate(20deg);
+transform: rotate(20deg);
 }
-
 .link:hover .link-title2 {
-  transform: rotate(0);
+transform: rotate(0);
 }
-
 /* Resume PDF Download. */
 .download-btn {
-  background-color: #4CAF50;
-  color: white;
-  padding: 10px 20px;
-  text-decoration: none;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
+background-color: #4CAF50;
+color: white;
+padding: 10px 20px;
+text-decoration: none;
+border-radius: 5px;
+transition: background-color 0.3s ease;
+}
+.download-btn:hover {
+background-color: #45a049;
 }
 
-.download-btn:hover {
-  background-color: #45a049;
+/* Style for the expanded menu */
+.navbar-menu-expanded {
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+  min-height: calc(100vh - 4rem); /* Full height minus navbar height */
+}
+
+/* Ensure the mobile menu extends properly */
+@media (max-width: 1023px) {
+  .navbar-menu-expanded {
+    background-color: #111827; /* Same as bg-gray-900 */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+  
+  /* Add additional padding to links in mobile view */
+  .link {
+    padding: 0.5rem 0;
+    height: auto;
+    justify-content: center;
+  }
+  
+  /* Add proper spacing for the login button in mobile view */
+  .animated-border-btn {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    display: inline-block;
+  }
 }
