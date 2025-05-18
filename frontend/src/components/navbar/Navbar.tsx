@@ -23,6 +23,7 @@ const Navbar: React.FC<NavbarProps> = ({ user }) => {
   const handleLogout = async () => {
     await signOut(auth);
     navigate("/");
+    setIsOpen(false); // Close menu after logout
   };
 
   const changeLanguage = (lang: string) => {
@@ -32,7 +33,6 @@ const Navbar: React.FC<NavbarProps> = ({ user }) => {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      // Only run if the menu is open AND screen width is below the 'lg' breakpoint
       if (isOpen && window.innerWidth < 1024) {
         if (
           menuRef.current &&
@@ -63,6 +63,7 @@ const Navbar: React.FC<NavbarProps> = ({ user }) => {
           <Link
             to="/"
             className="text-2xl font-bold glitch whitespace-nowrap hover:opacity-80 transition duration-200"
+            onClick={() => setIsOpen(false)}
           >
             Hichem A. Benzaïr
           </Link>
@@ -101,15 +102,14 @@ const Navbar: React.FC<NavbarProps> = ({ user }) => {
                 link: "https://github.com/MercuryAtom31",
                 internal: false,
               },
-              // {
-              //   label: t("Udemy"),
-              //   link: "https://www.udemy.com/course/essential-tips-for-new-computer-science-students/?utm_source=adwords&utm_medium=udemyads&utm_campaign=Search_DSA_GammaCatchall_NonP_la.EN_cc.CA&campaigntype=Search&portfolio=Canada&language=EN&product=Course&test=&audience=DSA&topic=&priority=Gamma&utm_content=deal4584&utm_term=_._ag_160250050302_._ad_700948785488_._kw__._de_c_._dm__._pl__._ti_aud-2268488108639:dsa-1456167871416_._li_9000561_._pd__._&matchtype=&gad_source=1&gbraid=0AAAAADROdO3IShDCiEOlH_Ei7yBU2xnbe&gclid=CjwKCAiAlPu9BhAjEiwA5NDSA3Mr5iGP1VFZDpkPrxgfBJz21ZqKkwHhlrHQw9CufXtYa6dC6kRi7RoCQOEQAvD_BwE",
-              //   internal: false,
-              // },
-              // { label: t("Youtube"), link: "/videos", internal: true },
             ].map((item, index) =>
               item.internal ? (
-                <Link to={item.link} key={index} className="link">
+                <Link
+                  to={item.link}
+                  key={index}
+                  className="link"
+                  onClick={() => setIsOpen(false)}
+                >
                   <span className="mask">
                     <div className="link-container">
                       <span className="link-title1 title">{item.label}</span>
@@ -124,6 +124,7 @@ const Navbar: React.FC<NavbarProps> = ({ user }) => {
                   className="link"
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => setIsOpen(false)}
                 >
                   <span className="mask">
                     <div className="link-container">
@@ -135,9 +136,13 @@ const Navbar: React.FC<NavbarProps> = ({ user }) => {
               )
             )}
 
-            {/* Conditionally show Admin Dashboard link for the admin user */}
+            {/* Admin Dashboard link for admin user */}
             {user && user.email === "hichembenzair@gmail.com" && (
-              <Link to="/admin/testimonials" className="link">
+              <Link
+                to="/admin/testimonials"
+                className="link"
+                onClick={() => setIsOpen(false)}
+              >
                 <span className="mask">
                   <div className="link-container">
                     <span className="link-title1 title">Admin</span>
@@ -149,14 +154,25 @@ const Navbar: React.FC<NavbarProps> = ({ user }) => {
 
             {/* Language Switcher */}
             <div className="mt-2 lg:mt-0 text-center lg:text-left">
-              <button onClick={() => changeLanguage("en")} className="mr-2">
+              <button
+                onClick={() => {
+                  changeLanguage("en");
+                  setIsOpen(false);
+                }}
+                className="mr-2"
+              >
                 <img
                   src={UkFlag}
                   alt="English"
                   className="inline-block h-6 w-6"
                 />
               </button>
-              <button onClick={() => changeLanguage("fr")}>
+              <button
+                onClick={() => {
+                  changeLanguage("fr");
+                  setIsOpen(false);
+                }}
+              >
                 <img
                   src={FranceFlag}
                   alt="French"
@@ -168,11 +184,18 @@ const Navbar: React.FC<NavbarProps> = ({ user }) => {
             {/* Authentication Buttons */}
             <div className="mt-2 lg:mt-0 text-center lg:text-left">
               {user ? (
-                <button onClick={handleLogout} className="animated-border-btn">
+                <button
+                  onClick={handleLogout}
+                  className="animated-border-btn"
+                >
                   {t("logout")}
                 </button>
               ) : (
-                <Link to="/login" className="animated-border-btn">
+                <Link
+                  to="/login"
+                  className="animated-border-btn"
+                  onClick={() => setIsOpen(false)}
+                >
                   {t("login")}
                 </Link>
               )}
