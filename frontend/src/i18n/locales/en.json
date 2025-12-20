@@ -28,6 +28,8 @@
   "placeholder_name": "Your Name",
   "placeholder_message": "Write your testimonial...",
   "button_submit": "Submit",
+  "loading_testimonials": "Loading testimonials...",
+  "error_testimonials": "Unable to load testimonials right now.",
   "no_testimonials": "No testimonials yet. Be the first to write one!",
   "alert_both_required": "Both fields are required!",
   "alert_testimonial_submitted": "Your testimonial was submitted and is pending admin approval!",

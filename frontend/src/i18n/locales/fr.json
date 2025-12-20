@@ -28,6 +28,8 @@
   "placeholder_name": "Votre nom",
   "placeholder_message": "Écrivez votre témoignage...",
   "button_submit": "Envoyer",
+  "loading_testimonials": "Chargement des témoignages...",
+  "error_testimonials": "Impossible de charger les témoignages pour le moment.",
   "no_testimonials": "Pas encore de témoignages. Soyez le premier à en écrire un!",
   "alert_both_required": "Les deux champs sont requis!",
   "alert_testimonial_submitted": "Votre témoignage a été soumis et est en attente d'approbation de l'administrateur!",

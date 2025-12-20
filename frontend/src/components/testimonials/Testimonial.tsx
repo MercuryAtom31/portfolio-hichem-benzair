@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import "./Testimonial.css";
 
@@ -13,13 +13,43 @@ const TestimonialSection = () => {
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [userName, setUserName] = useState("");
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  useEffect(() => {
-    fetch("https://portfolio-hichem-benzair.onrender.com/testimonials")
-      .then((res) => res.json())
-      .then((data) => setTestimonials(data))
-      .catch((error) => console.error("Error fetching testimonials:", error));
-  }, []);
+  const API_BASE_URL =
+    import.meta.env.VITE_API_BASE_URL ||
+    "https://portfolio-hichem-benzair.onrender.com";
+  const cacheKey = "testimonials_cache";
+
+  const fetchApprovedTestimonials = useCallback(
+    async (signal?: AbortSignal) => {
+      setLoading(true);
+      setError(null);
+
+      try {
+        const res = await fetch(`${API_BASE_URL}/testimonials`, { signal });
+        if (!res.ok) {
+          throw new Error(`HTTP error! Status: ${res.status}`);
+        }
+        const data = await res.json();
+        setTestimonials(data);
+        try {
+          localStorage.setItem(cacheKey, JSON.stringify(data));
+        } catch (storageError) {
+          console.warn("Unable to cache testimonials:", storageError);
+        }
+      } catch (fetchError) {
+        if (fetchError instanceof DOMException && fetchError.name === "AbortError") {
+          return;
+        }
+        console.error("Error fetching testimonials:", fetchError);
+        setError("Failed to load testimonials.");
+      } finally {
+        setLoading(false);
+      }
+    },
+    [API_BASE_URL]
+  );
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,7 +62,7 @@ const TestimonialSection = () => {
 
     try {
       const res = await fetch(
-        "https://portfolio-hichem-benzair.onrender.com/testimonials",
+        `${API_BASE_URL}/testimonials`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -42,7 +72,7 @@ const TestimonialSection = () => {
       if (!res.ok) throw new Error("Failed to add testimonial");
 
       alert(t("alert_testimonial_submitted"));
-      fetchApprovedTestimonials();
+      await fetchApprovedTestimonials();
 
       setUserName("");
       setMessage("");
@@ -51,16 +81,23 @@ const TestimonialSection = () => {
     }
   };
 
-  const fetchApprovedTestimonials = () => {
-    fetch("https://portfolio-hichem-benzair.onrender.com/testimonials")
-      .then((res) => res.json())
-      .then((data) => setTestimonials(data))
-      .catch((error) => console.error("Error fetching testimonials:", error));
-  };
-
   useEffect(() => {
-    fetchApprovedTestimonials();
-  }, []);
+    try {
+      const cached = localStorage.getItem(cacheKey);
+      if (cached) {
+        const parsed = JSON.parse(cached);
+        if (Array.isArray(parsed)) {
+          setTestimonials(parsed);
+        }
+      }
+    } catch (storageError) {
+      console.warn("Unable to read cached testimonials:", storageError);
+    }
+
+    const controller = new AbortController();
+    fetchApprovedTestimonials(controller.signal);
+    return () => controller.abort();
+  }, [fetchApprovedTestimonials]);
 
   return (
     <div className="testimonials-section">
@@ -82,7 +119,11 @@ const TestimonialSection = () => {
         <button type="submit">{t("button_submit")}</button>
       </form>
       <div className="testimonial-cards">
-        {testimonials.length > 0 ? (
+        {loading && testimonials.length === 0 ? (
+          <p>{t("loading_testimonials")}</p>
+        ) : error && testimonials.length === 0 ? (
+          <p>{t("error_testimonials")}</p>
+        ) : testimonials.length > 0 ? (
           testimonials.map((testimonial) => (
             <div key={testimonial.id} className="testimonial-card">
               <p>"{testimonial.message}"</p>
