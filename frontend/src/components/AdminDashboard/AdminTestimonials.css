@@ -92,6 +92,10 @@
   box-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
 }
 
+.admin-testimonials-table button + button {
+  margin-top: 8px;
+}
+
 /* Responsiveness for tablets */
 @media (max-width: 768px) {
   .admin-testimonials {
