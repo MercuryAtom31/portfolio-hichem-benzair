@@ -125,6 +125,8 @@
 /* Input Fields */
 .login-container input[type="email"],
 .login-container input[type="password"] {
+  box-sizing: border-box;
+  display: block;
   width: 100%;
   padding: 12px;
   margin: 10px 0;
@@ -150,6 +152,8 @@
 
 /* Submit Button */
 .login-container button {
+  box-sizing: border-box;
+  display: block;
   width: 100%;
   padding: 12px;
   background: #00cccc;
