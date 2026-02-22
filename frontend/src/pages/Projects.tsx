@@ -101,6 +101,22 @@ const projectImages = [
       </div>
     ),
   },  
+  {
+    title: "AI SEO Analyzer and Business Finder",
+    value: "ai-seo-analyzer",
+    content: (
+      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#1f4037] to-[#99f2c8] shadow-lg p-1">
+        <video
+          src="/videos/AI%20SEO%20Analyzer%20and%20Business%20Finder.mov"
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="rounded-xl w-full h-[500px] object-contain"
+        />
+      </div>
+    ),
+  },
 ];
 
 const Projects = () => {
