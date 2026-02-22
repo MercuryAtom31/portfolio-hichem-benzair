@@ -25,6 +25,23 @@ const projectImages = [
     ),
   },
   {
+    title: "Email Safety Training",
+    value: "email-safety-training",
+    url: "https://mercuryatom31.github.io/Email-and-Malware-Awareness-and-Training-program/#/",
+    content: (
+      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#0f2027] via-[#203a43] to-[#2c5364] shadow-lg p-1">
+        <video
+          src="/videos/EmailSafetyTraining.mov"
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="rounded-xl w-full h-[500px] object-contain"
+        />
+      </div>
+    ),
+  },
+  {
     title: "C Clean Inc.",
     value: "ccleaninc",
     url: "https://github.com/ThomasBedard/ccleaninc",
