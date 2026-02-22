@@ -42,6 +42,23 @@ const projectImages = [
     ),
   },
   {
+    title: "Conjugaison Fastoche",
+    value: "conjugaison-fastoche",
+    url: "https://mercuryatom31.github.io/Conjugaison-Fastoche/#/",
+    content: (
+      <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#f953c6] to-[#b91d73] shadow-lg p-1">
+        <video
+          src="/videos/ConjugaisonFastoche.mov"
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="rounded-xl w-full h-[500px] object-contain"
+        />
+      </div>
+    ),
+  },
+  {
     title: "C Clean Inc.",
     value: "ccleaninc",
     url: "https://github.com/ThomasBedard/ccleaninc",
